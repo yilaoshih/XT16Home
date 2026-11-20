@@ -1,0 +1,25 @@
+{
+  "sample": true,
+  "className": "新泰16班 本壘報",
+  "paperName": "本壘報",
+  "classTag": "新泰16班",
+  "classFull": "新泰國中 七年16班",
+  "subtitle": "「本壘」英文為「Home plate」，所有跑者得分都要回到這邊，希望這邊成為大家分享、記住我們做過什麼的地方。",
+  "motto": "Rising Up! 一起做夢、一起長大！",
+  "teamName": "新泰國中棒球隊",
+  "inningsPerGame": 7,
+  "minABPerGame": 2,
+  "contactBook": {
+    "url": "https://script.google.com/macros/s/AKfycby00sHV-lKyNzrwBHgYuu58dA-vLfSqQ0hWIK_5GdfPau0BeL_AXqt2Pr23FedbIvM/exec",
+    "embed": true,
+    "note": "每天放學前更新作業與提醒，家長看完請簽名。"
+  },
+  "teacherNote": "這裡是我們班的班刊。\n教室裡讀過的文章、同學寫下的心得、球場上的每一場比賽、一起出去的每一天，都會慢慢記在這裡。\n希望三年後回頭翻，大家都還記得我們是怎麼一起長大的。",
+  "teacherSign": "導師",
+  "teamPage": {
+    "url": "https://www.facebook.com/profile.php?id=100063651651656",
+    "label": "球隊 Facebook 粉絲專頁"
+  },
+  "albumNote": "完整相簿請見班級 LINE 家長群組",
+  "teamShort": "新泰國中"
+}
