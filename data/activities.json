@@ -1,5 +1,32 @@
 [
   {
+    "id": "a260831",
+    "date": "2026-08-31",
+    "type": "班級活動",
+    "title": "劉繼文老師到班分享數學學習",
+    "description": "8 月 31 日，師鐸獎名師劉繼文老師到班分享數學自學講義的書寫，以及數學學習的注意事項。全班一邊看前方螢幕上的題目，一邊在講義和平板上跟著寫。",
+    "highlights": [],
+    "cover": {
+      "src": "images/a260831/cover.jpg",
+      "thumb": "images/a260831/cover-s.jpg",
+      "alt": "劉繼文老師在教室前方講解，全班坐在位子上跟著寫講義",
+      "position": "50% 50%"
+    },
+    "photos": [
+      {
+        "src": "images/a260831/01.jpg",
+        "thumb": "images/a260831/01-s.jpg",
+        "caption": "劉老師走到同學之間，看看大家講義寫得怎麼樣"
+      },
+      {
+        "src": "images/a260831/02.jpg",
+        "thumb": "images/a260831/02-s.jpg",
+        "caption": "劉老師在台前講解，大家對照螢幕上的題目寫講義"
+      }
+    ],
+    "albumUrl": ""
+  },
+  {
     "id": "a260915",
     "date": "2026-09-15",
     "type": "班級活動",
@@ -68,7 +95,7 @@
     "date": "2026-10-31",
     "type": "校慶運動會",
     "title": "校慶運動會",
-    "description": "10 月 31 日校慶，大家一早換上球隊隊服、互相畫上戰鬥妝。八點多舉著班牌和「新泰」字牌進場表演，下午一點多再換上藍色背心跑大隊接力。",
+    "description": "10 月 31 日校慶，大家一早換上球隊隊服、互相畫上戰鬥妝。八點多舉著班牌和「新泰」字牌進場表演，下午一點多再換上藍色背心跑大隊接力。最後全班拿著獎狀，在司令台前合照。",
     "highlights": [],
     "cover": {
       "src": "images/a261031/cover.jpg",
@@ -126,6 +153,24 @@
         "src": "images/a261031/10.jpg",
         "thumb": "images/a261031/10-s.jpg",
         "caption": "大隊接力，大家拚命往前追"
+      },
+      {
+        "src": "images/a261031/11.jpg",
+        "thumb": "images/a261031/11-s.jpg",
+        "caption": "拿到獎狀了！全班在司令台前比讚合照"
+      },
+      {
+        "src": "images/a261031/12.jpg",
+        "thumb": "images/a261031/12-s.jpg",
+        "caption": "換個姿勢再拍一張，大家一起擺出同一個動作"
+      }
+    ],
+    "videos": [
+      {
+        "src": "images/a261031/video.mp4",
+        "poster": "images/a261031/video-poster.jpg",
+        "caption": "穿著球隊隊服、畫好戰鬥妝，全班圍成一圈準備上場",
+        "duration": "0:08"
       }
     ],
     "albumUrl": ""
