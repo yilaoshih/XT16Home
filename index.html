@@ -1115,12 +1115,15 @@ function boardHTML(g){
   h += '<th class="rhe" scope="col">分</th><th scope="col">安</th><th scope="col">失</th>';
   return `<div class="board"><table><thead><tr>${h}</tr></thead><tbody>${rows.map(r => `<tr class="${r.cls}"><td class="team">${esc(r.name)}</td>${Array.from({length:n}, (_, i) => cell(r.line[i])).join('')}<td class="rhe R">${r.r}</td><td>${r.h}</td><td>${r.e}</td></tr>`).join('')}</tbody></table></div>`;
 }
+// 守備位置：batting[].pos 填計分表的代號 1～9（也可以填文字或陣列，例如 [8, 1] 表示中外野轉投手）
+const POS = {1:'投手', 2:'捕手', 3:'一壘', 4:'二壘', 5:'三壘', 6:'游擊', 7:'左外野', 8:'中外野', 9:'右外野'};
+const posText = p => p == null || p === '' ? '' : (Array.isArray(p) ? p : [p]).map(x => POS[x] || String(x)).join('・');
 function batTable(lines, label, first = '球員'){
-  const t = sumBat(lines);
+  const t = sumBat(lines), hasPos = lines.some(l => posText(l.pos));
   const cols = [['ab','打數'],['h','安打'],['d','二安'],['t','三安'],['hr','全壘'],['rbi','打點'],['r','得分'],['bb','四壞'],['hbp','觸身'],['so','三振'],['sb','盜壘']];
-  return `<div class="tscroll"><table class="stat"><thead><tr><th class="l sticky">${first}</th>${cols.map(c => `<th>${c[1]}</th>`).join('')}<th>打擊率</th></tr></thead><tbody>
-    ${lines.map(l => `<tr><td class="l sticky${l.sub ? ' subin' : ''}">${label(l)}</td>${cols.map(([k]) => `<td${k === 'h' && l.h >= 2 ? ' class="hi"' : ''}>${l[k] || 0}</td>`).join('')}<td>${avg(sumBat([l]))}</td></tr>`).join('')}
-    <tr class="tot"><td class="l sticky">合計</td>${cols.map(([k]) => `<td>${t[k]}</td>`).join('')}<td>${avg(t)}</td></tr></tbody></table></div>`;
+  return `<div class="tscroll"><table class="stat"><thead><tr><th class="l sticky">${first}</th>${hasPos ? '<th class="l">守備</th>' : ''}${cols.map(c => `<th>${c[1]}</th>`).join('')}<th>打擊率</th></tr></thead><tbody>
+    ${lines.map(l => `<tr><td class="l sticky${l.sub ? ' subin' : ''}">${label(l)}</td>${hasPos ? `<td class="l pos">${esc(posText(l.pos)) || '—'}</td>` : ''}${cols.map(([k]) => `<td${k === 'h' && l.h >= 2 ? ' class="hi"' : ''}>${l[k] || 0}</td>`).join('')}<td>${avg(sumBat([l]))}</td></tr>`).join('')}
+    <tr class="tot"><td class="l sticky">合計</td>${hasPos ? '<td></td>' : ''}${cols.map(([k]) => `<td>${t[k]}</td>`).join('')}<td>${avg(t)}</td></tr></tbody></table></div>`;
 }
 function pitTable(lines, label, first){
   const t = sumPit(lines);

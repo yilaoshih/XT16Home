@@ -9,13 +9,18 @@
     {
       "seat": 2,
       "number": 2,
-      "positions": [],
+      "positions": [
+        "外野手"
+      ],
       "photo": "images/players/02.json"
     },
     {
       "seat": 3,
       "number": 3,
-      "positions": [],
+      "positions": [
+        "外野手",
+        "投手"
+      ],
       "photo": "images/players/03.json"
     },
     {
@@ -27,37 +32,49 @@
     {
       "seat": 5,
       "number": 5,
-      "positions": [],
+      "positions": [
+        "游擊手"
+      ],
       "photo": "images/players/05.json"
     },
     {
       "seat": 6,
       "number": 6,
-      "positions": [],
+      "positions": [
+        "投手"
+      ],
       "photo": "images/players/06.json"
     },
     {
       "seat": 7,
       "number": 7,
-      "positions": [],
+      "positions": [
+        "外野手"
+      ],
       "photo": "images/players/07.json"
     },
     {
       "seat": 8,
       "number": 8,
-      "positions": [],
+      "positions": [
+        "二壘手"
+      ],
       "photo": "images/players/08.json"
     },
     {
       "seat": 9,
       "number": 9,
-      "positions": [],
+      "positions": [
+        "三壘手"
+      ],
       "photo": "images/players/09.json"
     },
     {
       "seat": 10,
       "number": 10,
-      "positions": [],
+      "positions": [
+        "外野手"
+      ],
       "photo": "images/players/10.json"
     },
     {
@@ -69,7 +86,9 @@
     {
       "seat": 12,
       "number": 12,
-      "positions": [],
+      "positions": [
+        "外野手"
+      ],
       "photo": "images/players/12.json"
     },
     {
@@ -93,13 +112,17 @@
     {
       "seat": 16,
       "number": 16,
-      "positions": [],
+      "positions": [
+        "投手"
+      ],
       "photo": "images/players/16.json"
     },
     {
       "seat": 17,
       "number": 17,
-      "positions": [],
+      "positions": [
+        "外野手"
+      ],
       "photo": "images/players/17.json"
     },
     {
@@ -111,13 +134,17 @@
     {
       "seat": 19,
       "number": 19,
-      "positions": [],
+      "positions": [
+        "一壘手"
+      ],
       "photo": "images/players/19.json"
     },
     {
       "seat": 20,
       "number": 20,
-      "positions": [],
+      "positions": [
+        "投手"
+      ],
       "photo": "images/players/20.json"
     },
     {
@@ -129,19 +156,25 @@
     {
       "seat": 22,
       "number": 22,
-      "positions": [],
+      "positions": [
+        "外野手"
+      ],
       "photo": "images/players/22.json"
     },
     {
       "seat": 23,
       "number": 23,
-      "positions": [],
+      "positions": [
+        "二壘手"
+      ],
       "photo": "images/players/23.json"
     },
     {
       "seat": 24,
       "number": 24,
-      "positions": [],
+      "positions": [
+        "捕手"
+      ],
       "photo": "images/players/24.json"
     },
     {
@@ -483,6 +516,7 @@
         {
           "order": 1,
           "seat": 12,
+          "pos": 7,
           "ab": 1,
           "r": 1,
           "bb": 2
@@ -490,6 +524,7 @@
         {
           "order": 1,
           "seat": 17,
+          "pos": 7,
           "sub": true,
           "ab": 1,
           "r": 1,
@@ -498,6 +533,7 @@
         {
           "order": 2,
           "seat": 23,
+          "pos": 4,
           "ab": 1,
           "r": 1,
           "rbi": 1,
@@ -506,6 +542,7 @@
         {
           "order": 2,
           "seat": 8,
+          "pos": 4,
           "sub": true,
           "ab": 1,
           "r": 2,
@@ -516,6 +553,10 @@
         {
           "order": 3,
           "seat": 3,
+          "pos": [
+            8,
+            1
+          ],
           "ab": 1,
           "r": 1,
           "h": 1,
@@ -525,6 +566,7 @@
         {
           "order": 3,
           "seat": 22,
+          "pos": 8,
           "sub": true,
           "ab": 2,
           "r": 1,
@@ -535,6 +577,7 @@
         {
           "order": 3,
           "seat": 2,
+          "pos": 8,
           "sub": true,
           "ab": 1,
           "r": 1,
@@ -543,6 +586,7 @@
         {
           "order": 4,
           "seat": 19,
+          "pos": 3,
           "ab": 3,
           "r": 2,
           "h": 1,
@@ -553,6 +597,7 @@
         {
           "order": 5,
           "seat": 5,
+          "pos": 6,
           "ab": 5,
           "r": 1,
           "h": 3,
@@ -562,6 +607,7 @@
         {
           "order": 6,
           "seat": 24,
+          "pos": 2,
           "ab": 5,
           "r": 2,
           "h": 2,
@@ -571,11 +617,13 @@
         {
           "order": 7,
           "seat": 10,
+          "pos": 9,
           "ab": 2
         },
         {
           "order": 7,
           "seat": 7,
+          "pos": 9,
           "sub": true,
           "ab": 1,
           "r": 1,
@@ -585,6 +633,7 @@
         {
           "order": 8,
           "seat": 9,
+          "pos": 5,
           "ab": 3,
           "r": 1,
           "h": 2,
@@ -596,6 +645,7 @@
         {
           "order": 9,
           "seat": 16,
+          "pos": 1,
           "ab": 2,
           "r": 1,
           "bb": 1,
@@ -604,6 +654,7 @@
         {
           "order": 9,
           "seat": 20,
+          "pos": 1,
           "sub": true,
           "ab": 1
         }
