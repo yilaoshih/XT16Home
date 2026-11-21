@@ -205,6 +205,9 @@ mark{background:var(--sun-soft);color:inherit;border-radius:3px;padding:0 1px;bo
 .banner .wrap{position:relative;z-index:2}
 .banner.home .wrap{padding-block:72px 80px}
 .banner.page .wrap{padding-block:46px 52px}
+.hero-photo{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 70%;opacity:.12;filter:saturate(.6)}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--hero) 55%,transparent) 0%,transparent 70%)}
 .hero-deco{position:absolute;inset:0;z-index:1;pointer-events:none}
 .hero-deco i{position:absolute;top:-20%;bottom:-20%;transform:skewX(-20deg)}
 .hero-deco .s1{right:14%;width:72px;background:var(--btn)}
@@ -835,7 +838,9 @@ function chrome(){
 const HERO_DECO = `<div class="hero-deco" aria-hidden="true"><i class="s3"></i><i class="s1"></i><i class="s2"></i><svg viewBox="0 0 100 100"><path d="M10 6H90V54L50 95L10 54Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/></svg></div>`;
 function banner(kind, title, sub, extra = ''){
   const T = kind === 'home' ? 'h1' : 'h2';
-  return `<header class="banner ${kind}">${HERO_DECO}
+  const hp = kind === 'home' ? D.site.heroPhoto : null;
+  const photo = hp && hp.src ? `<picture class="hero-photo" aria-hidden="true">${hp.thumb ? `<source media="(max-width:720px)" srcset="${esc(hp.thumb)}">` : ''}<img src="${esc(hp.src)}" alt=""${hp.position ? ` style="object-position:${esc(hp.position)}"` : ''}></picture>` : '';
+  return `<header class="banner ${kind}">${photo}${HERO_DECO}
     <div class="wrap"><${T}>${title}</${T}>${sub ? `<p>${sub}</p>` : ''}${extra}</div></header>`;
 }
 const band = (cls, inner, wrap = '') => `<section class="band ${cls}"><div class="wrap ${wrap}">${inner}</div></section>`;
