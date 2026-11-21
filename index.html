@@ -155,6 +155,9 @@ mark{background:var(--sun-soft);color:inherit;border-radius:3px;padding:0 1px;bo
 .pl-cells b{display:block;font-family:var(--f-num);font-weight:600;font-size:1.7rem;line-height:1.35;color:var(--head);font-variant-numeric:tabular-nums}
 .pl-sub{font-size:1.02rem;font-weight:900;color:var(--head);margin:26px 0 10px}
 .pl-none{color:var(--ink-2);font-weight:400;text-align:center!important;padding:18px 10px!important}
+.pl-pitch{margin-top:48px}
+.pl-pitch .pl-box{border-top-color:var(--head)}
+.pl-foot{margin:14px 0 0;font-size:.84rem;color:var(--ink-2)}
 .pl-trophies{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .pl-trophies li{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:16px;align-items:center;padding:14px 18px;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow)}
 .pl-trophies b{grid-row:span 2;font-family:var(--f-head);font-weight:900;font-size:1.25rem;line-height:1.5;padding:2px 14px;color:var(--on-sun);background:var(--sun);transform:var(--slant)}
@@ -389,6 +392,7 @@ a.row:hover{transform:translateY(-3px);border-left-color:var(--berry);box-shadow
 .album-note{display:flex!important;align-items:center;gap:8px;font-size:.92rem;color:var(--ink-2);background:var(--card);box-shadow:var(--shadow);border-radius:8px;padding:6px 14px;width:fit-content}
 .album-note .ico{width:18px;height:18px;color:var(--berry)}
 .gallery{margin-top:40px}
+.stack>.gallery{margin-top:0}
 .act-notes{margin-top:44px}
 .vids{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));max-width:760px}
 .vid{margin:0}
@@ -427,10 +431,24 @@ a.row:hover{transform:translateY(-3px);border-left-color:var(--berry);box-shadow
 .record b{font-family:var(--f-num);font-weight:700;font-size:1.85rem;line-height:1.25;color:var(--head);font-variant-numeric:tabular-nums}
 .record span{font-size:.85rem;color:var(--ink-2)}
 .roster{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-.player{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);text-decoration:none;color:var(--ink);min-width:0;transition:transform .18s ease,box-shadow .18s ease}
+.player{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 14px;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);text-decoration:none;color:var(--ink);min-width:0;transition:transform .18s ease,box-shadow .18s ease}
 .player:hover{transform:translateY(-4px);box-shadow:0 0 0 2px var(--berry),var(--shadow-up)}
 .jersey{flex:none;width:46px;height:46px;border-radius:8px;display:grid;place-items:center;background:var(--head);color:var(--on-head);font-family:var(--f-num);font-weight:700;font-size:1.35rem;transform:var(--slant)}
 .player:hover .jersey{background:var(--btn);color:#FFFFFF}
+/* 名字一律改成「紅色圓底＋座號」（個人頁以外） */
+.sb{display:inline-grid;place-items:center;flex:none;box-sizing:border-box;width:2.05em;height:2.05em;border-radius:50%;background:var(--btn);color:#FFFFFF;font-family:var(--f-num);font-weight:600;font-size:.82em;font-style:normal;line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums;vertical-align:.08em;margin:0 .12em;text-decoration:none;text-indent:0}
+a .sb,a.sb{transition:background .15s,box-shadow .15s}
+a:hover .sb,a.sb:hover{background:var(--btn-hover);box-shadow:0 0 0 2px var(--sun)}
+.sb.hit{box-shadow:0 0 0 2px var(--sun)}
+.sbw{white-space:nowrap}
+.player .sb{width:54px;height:54px;font-size:1.45rem;margin:0}
+.who .sb{width:84px;height:84px;font-size:2.3rem;margin:0}
+.note figcaption .sb{font-size:.95rem;margin:0}
+.ldr li a{display:inline-flex;align-items:center}
+.ldr li a .sb{margin:0}
+.stat td .sb{margin:0 .1em}
+.mvp a .sb{margin:0}
+.pager .sb{margin:0 .2em}
 .player b{display:block;font-weight:900;line-height:1.4;color:var(--head)}
 .player small{display:block;color:var(--ink-2);font-size:.8rem;line-height:1.4}
 .player>span:last-child{min-width:0}
@@ -551,6 +569,8 @@ footer a{color:var(--hero-ink)}
   .pl-mark{width:220px;height:220px;right:-50px;bottom:-60px}
   .player{flex-direction:column;gap:4px;padding:10px 4px;text-align:center}
   .player .jersey{width:40px;height:40px;font-size:1.15rem}
+  .player .sb{width:44px;height:44px;font-size:1.2rem}
+  .who .sb{width:64px;height:64px;font-size:1.8rem}
   .player b{font-size:.92rem}
   .player small{display:none}
   .player.has-av .jersey{display:none}
@@ -623,6 +643,21 @@ const wd = s => WD[dt(s).getDay()];
 const byDateDesc = (a, b) => b.date.localeCompare(a.date) || (b.seq || 0) - (a.seq || 0);
 const paras = t => String(t || '').split(/\n+/).map(x => x.trim()).filter(Boolean);
 const firstSentence = t => { const m = String(t || '').match(/^[^。！？]*[。！？]/); return m ? m[0] : String(t || ''); };
+// 名字一律改成「紅色圓底＋座號」：個人頁以外不顯示稱呼。
+// 文字裡先把同學換成記號 \uE000座號\uE001，輸出 HTML 時（rt／tk）再換成紅色圓形徽章。
+const TK = seat => `\uE000${pad2(+seat)}\uE001`;
+const seatBadge = (seat, hit) => `<span class="sb${hit ? ' hit' : ''}" title="${+seat} 號">${pad2(+seat)}</span>`;
+// 徽章後面緊接的標點（、，。）跟徽章黏在一起，避免換行後「、」跑到行首
+const tk = html => String(html).replace(/\uE000((?:<\/?mark>|\d)+)\uE001([、，。；：！？）」』]?)/g, (_, x, pu) => { const b = seatBadge(x.replace(/<[^>]*>/g, ''), x.includes('<mark>')); return pu ? `<span class="sbw">${b}${pu}</span>` : b; }).replace(/[\uE000\uE001]/g, '');
+const rt = s => tk(esc(s));
+// 資料裡的「1號朱」「14號陳又」（背號＋稱呼）換成記號；只換背號和稱呼對得上班級名單的
+function tokNames(t){
+  if (!t) return t || '';
+  return String(t).replace(/(\d{1,2})\s*號\s*([\u4e00-\u9fff]{1,2})/g, (m, n, name) => {
+    const p = D.baseball.players.find(x => x.number === +n), k = p && D.kids.get(p.seat);
+    return k && name.startsWith(k.nickname) ? TK(p.seat) + name.slice(k.nickname.length) : m;
+  });
+}
 
 // ---------- icons (stroked line art) ----------
 const ICON = {
@@ -659,9 +694,8 @@ const RES = {W:'勝', L:'敗', T:'和'};
 const CN = ['','一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五'];
 const halfName = h => `${CN[h.inn] || h.inn}局${h.half}`;
 const cmpS = (u, t) => u > t ? 'us' : u < t ? 'them' : 'tie';
-const nick = seat => D.kids.get(+seat)?.nickname || `${pad2(seat)} 號`;
-// 戰報裡的名字：班上同學用稱呼，其他年級的隊友用遮名
-const who = l => l.seat ? nick(l.seat) : (l.name || '隊友');
+// 戰報裡的名字：班上同學用「紅色圓底＋座號」（文字裡先放記號，輸出時換成徽章），其他年級的隊友用遮名
+const who = l => l.seat ? TK(l.seat) : (l.name || '隊友');
 function gameStates(g){
   const us = g.lineScore.us, them = g.lineScore.them, n = Math.max(us.length, them.length);
   const away = g.home ? them : us, home = g.home ? us : them, out = [];
@@ -712,7 +746,7 @@ function flowText(g){
   const text = pick.map(s => { const sub = s.team === prev ? '' : (s.team === 'us' ? '我們' : opp); prev = s.team; return sub + phrase(s, s === scoring[0]); }).join('，');
   return text + (scoring[scoring.length - 1].inn < last.inn ? '，之後雙方都沒有再得分' : '') + '。';
 }
-const perf = b => b.h * 2 + (b.rbi || 0) * 1.5 + (b.hr || 0) * 3 + (b.d || 0) + (b.t || 0) * 2 + (b.sb || 0) * .5 + (b.r || 0) * .5;
+const perf = b => (b.h || 0) * 2 + (b.rbi || 0) * 1.5 + (b.hr || 0) * 3 + (b.d || 0) + (b.t || 0) * 2 + (b.sb || 0) * .5 + (b.r || 0) * .5;
 function batText(g){
   if (!(g.batting || []).length){
     const u = teamLine(g, 'us');
@@ -755,21 +789,21 @@ function autoHeadline(g){
   if (s.res === 'L') return last.team === 'them' && last.before !== 'them' ? `${s.us}:${s.them} 最後半局遭逆轉，惜敗${opp}` : `${s.us}:${s.them} ${diff <= 2 ? '惜敗' : '不敵'}${opp}`;
   return `${s.us}:${s.them} 與${opp}戰成平手`;
 }
-const gHead = g => g.headline || autoHeadline(g);
-const gReport = g => g.notes ? {auto:false, paras: paras(g.notes)} : !g.lineScore ? {auto:true, paras:[leadText(g)]} : {auto:true, paras: [leadText(g) + flowText(g), batText(g), pitText(g)].filter(Boolean)};
+const gHead = g => tokNames(g.headline) || autoHeadline(g);
+const gReport = g => g.notes ? {auto:false, paras: paras(tokNames(g.notes))} : !g.lineScore ? {auto:true, paras:[leadText(g)]} : {auto:true, paras: [leadText(g) + flowText(g), batText(g), pitText(g)].filter(Boolean)};
 function gStar(g){
   if (g.mvp) return {seat: g.mvp, label: 'MVP'};
   const b = [...g.batting].sort((a, c) => perf(c) - perf(a))[0];
   return b && perf(b) > 0 ? {seat: b.seat, name: b.name, label: '數據之星'} : null;
 }
-const starHTML = g => { const st = gStar(g); return st ? `<div class="mvp"><span class="badge">${st.label}</span>${st.seat ? `<a href="#s-${pad2(st.seat)}">${plLabel(st.seat)}</a>` : `<span class="other">${esc(st.name || '')}</span>`}</div>` : ''; };
+const starHTML = g => { const st = gStar(g); return st ? `<div class="mvp"><span class="badge">${st.label}</span>${st.seat ? `<a href="#s-${pad2(st.seat)}" aria-label="${+st.seat} 號的個人頁">${plLabel(st.seat)}</a>` : `<span class="other">${esc(st.name || '')}</span>`}</div>` : ''; };
 
 // ---------- people ----------
 const kid = seat => D.kids.get(+seat) || {seat:+seat, nickname:`${pad2(seat)} 號`};
 const plr = seat => D.players.get(+seat);
-const plLabel = seat => { const p = plr(seat); return `${p ? '#' + p.number + ' ' : ''}${esc(kid(seat).nickname)}`; };
+const plLabel = seat => seatBadge(seat);
 // 紀錄表上的一列：班上同學連到個人頁；其他年級的隊友只顯示遮名
-const lineName = l => l.seat ? `<a href="#s-${pad2(l.seat)}">${plLabel(l.seat)}</a>` : `<span class="other">${esc(l.name || '隊友')}</span>`;
+const lineName = l => l.seat ? `<a href="#s-${pad2(l.seat)}" aria-label="${+l.seat} 號的個人頁">${plLabel(l.seat)}</a>` : `<span class="other">${esc(l.name || '隊友')}</span>`;
 const DEC = {W:'勝投', L:'敗投', S:'救援'};
 
 async function load(){
@@ -841,13 +875,13 @@ function cover(it, size){
 }
 function card(it){
   const [name, tone] = TOPIC[it.topic];
-  return `<a class="card" href="${it.href}">${cover(it, 'sm')}<div class="card-body"><p class="kicker t-${tone}">${name}・${md(it.date)}</p><h3>${esc(it.title)}</h3><p class="clamp">${esc(firstSentence(it.text))}</p></div></a>`;
+  return `<a class="card" href="${it.href}">${cover(it, 'sm')}<div class="card-body"><p class="kicker t-${tone}">${name}・${md(it.date)}</p><h3>${rt(it.title)}</h3><p class="clamp">${rt(firstSentence(it.text))}</p></div></a>`;
 }
 function story(it, body){
   const [name, tone] = TOPIC[it.topic];
   return `<article class="story"><a href="${it.href}" tabindex="-1" aria-hidden="true">${cover(it, 'lg')}</a>
     <div class="story-body"><p class="kicker t-${tone}">${name}・${fmtD(it.date)}（${wd(it.date)}）</p>
-    <h3 class="story-title"><a href="${it.href}">${esc(it.title)}</a></h3>${body}</div></article>`;
+    <h3 class="story-title"><a href="${it.href}">${rt(it.title)}</a></h3>${body}</div></article>`;
 }
 function groupBy(list, key){
   const m = new Map();
@@ -860,7 +894,7 @@ function groupBy(list, key){
 const mottoHTML = m => { const k = String(m).match(/^([A-Za-z][A-Za-z0-9 '!.,&-]*[!.]?)\s+(.+)$/); return k ? `<span class="m-en">${esc(k[1])}</span><span class="m-zh">${esc(k[2])}</span>` : esc(m); };
 function vHome(){
   const s = D.site, items = news(), [top, ...rest] = items;
-  const latest = top ? story(top, `<p>${esc(top.text)}</p><a class="btn" href="${top.href}">繼續閱讀</a>`) : '<div class="empty"><p>還沒有任何消息。</p></div>';
+  const latest = top ? story(top, `<p>${rt(top.text)}</p><a class="btn" href="${top.href}">繼續閱讀</a>`) : '<div class="empty"><p>還沒有任何消息。</p></div>';
   const cb = safeUrl(s.contactBook?.url);
   const tiles = [
     ['#contact','note','leaf','聯絡簿','今天的作業與提醒', cb ? '線上聯絡簿' : '網址待設定'],
@@ -886,7 +920,7 @@ function vContact(){
 
 // ---------- 閱讀心得 ----------
 function noteHTML(x, focus){
-  return `<figure class="note${focus === x.seat ? ' focus' : ''}" data-seat="${x.seat}"><blockquote>${paras(x.text).map(t => `<p>${esc(t)}</p>`).join('')}</blockquote><figcaption><span class="seat">${pad2(x.seat)}</span>${esc(kid(x.seat).nickname)}</figcaption></figure>`;
+  return `<figure class="note${focus === x.seat ? ' focus' : ''}" data-seat="${x.seat}"><blockquote>${paras(x.text).map(t => `<p>${esc(t)}</p>`).join('')}</blockquote><figcaption>${seatBadge(x.seat)}</figcaption></figure>`;
 }
 function vReading(id, focus){
   const B = banner('page', '閱讀心得', '聯絡簿上每週的閱讀文章，和老師精選的同學心得。');
@@ -973,10 +1007,10 @@ function albumHTML(a){
 function actBody(a){
   return `<p>${esc(a.description)}</p>${(a.highlights || []).length ? `<ul>${a.highlights.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${albumHTML(a)}`;
 }
-function photosHTML(a){
+function photosHTML(a, title = '活動照片'){
   const ps = a.photos || [];
   if (!ps.length) return '';
-  return `<section class="gallery"><div class="sec-head"><h3 class="sub-title">活動照片</h3><p>${ps.length} 張・點照片可以放大</p></div>
+  return `<section class="gallery"><div class="sec-head"><h3 class="sub-title">${title}</h3><p>${ps.length} 張・點照片可以放大</p></div>
     <div class="photos" style="--cols:${ps.length <= 2 ? 3 : ps.length % 5 === 0 ? 5 : ps.length % 4 === 0 ? 4 : ps.length % 3 === 0 ? 3 : 5}">${ps.map((p, i) => `<button class="ph" type="button" data-g="${esc(a.id)}" data-i="${i}" aria-label="放大第 ${i+1} 張：${esc(p.caption || '')}"><img src="${esc(p.thumb || p.src)}" alt="${esc(p.caption || '')}" loading="lazy"></button>`).join('')}</div></section>`;
 }
 // 活動影片：activities.json → videos[{src, poster, caption, duration}]；點了才載入
@@ -1007,6 +1041,13 @@ function vGallery(id, focus){
 }
 
 // ---------- 球場表現 ----------
+// 比賽剪影：baseball.json → games[].photos[{src, thumb, caption}]（照片放 images/比賽id/，和活動照片同規格）
+// 有 photos 欄位才顯示這一區；photos 是空陣列時顯示「整理中」
+function gamePhotosHTML(g){
+  if (!Array.isArray(g.photos)) return '';
+  if (g.photos.length) return photosHTML(g, '比賽剪影');
+  return `<section class="gallery"><div class="sec-head"><h3 class="sub-title">比賽剪影</h3><p>球場上的精彩瞬間</p></div><div class="empty"><p>比賽照片整理好後，會放在這裡。</p></div></section>`;
+}
 function rankTop(arr, f){ return arr.filter(x => f(x.t) > 0).sort((a, b) => f(b.t) - f(a.t)).slice(0, 3).map(x => [x.seat, f(x.t)]); }
 function leadersHTML(){
   const games = D.games, bat = new Map(), pit = new Map();
@@ -1026,7 +1067,7 @@ function leadersHTML(){
     {name:'防禦率', note:`至少 ${np} 局`, rows: P.filter(x => x.t.outs >= minOuts).sort((a, b) => a.t.er/a.t.outs - b.t.er/b.t.outs).slice(0, 3).map(x => [x.seat, era(x.t.er, x.t.outs)])},
   ];
   return `<div class="leaders">${boards.map(b => `<div class="ldr"><h4>${b.name}${b.note ? `<small>${b.note}</small>` : ''}</h4>
-    ${b.rows.length ? `<ol>${b.rows.map(([seat, v], i) => `<li><span class="rk">${i+1}</span><a href="#s-${pad2(seat)}">${plLabel(seat)}</a><span class="v">${v}</span></li>`).join('')}</ol>` : '<p class="muted" style="margin:0;font-size:.85rem">還沒有人達到門檻</p>'}</div>`).join('')}</div>`;
+    ${b.rows.length ? `<ol>${b.rows.map(([seat, v], i) => `<li><span class="rk">${i+1}</span><a href="#s-${pad2(seat)}" aria-label="${+seat} 號的個人頁">${plLabel(seat)}</a><span class="v">${v}</span></li>`).join('')}</ol>` : '<p class="muted" style="margin:0;font-size:.85rem">還沒有人達到門檻</p>'}</div>`).join('')}</div>`;
 }
 const GLOSS = () => `<dl class="gloss">
   <div><dt>打數</dt><dd>打席扣掉四壞、觸身、犧牲打</dd></div>
@@ -1036,9 +1077,10 @@ const GLOSS = () => `<dl class="gloss">
   <div><dt>打點</dt><dd>因為自己打擊讓隊友得分</dd></div>
   <div><dt>防禦率</dt><dd>每 ${D.site.inningsPerGame} 局平均自責分</dd></div>
   <div><dt>自責分</dt><dd>不是因為守備失誤而失的分</dd></div>
+  <div><dt>WHIP</dt><dd>（被安打＋四壞）÷ 局數，平均每局讓幾位打者上壘</dd></div>
   <div><dt>局數 4.1</dt><dd>4 局又 1 個出局數</dd></div></dl>`;
 function gameBody(g){
-  return `<p class="story-meta">${metaText(g)}</p><p>${esc(gReport(g).paras[0])}</p>
+  return `<p class="story-meta">${metaText(g)}</p><p>${rt(gReport(g).paras[0])}</p>
     ${starHTML(g)}
     <div class="btns"><a class="btn" href="#game-${esc(g.id)}">看完整戰報</a></div>`;
 }
@@ -1051,14 +1093,14 @@ function vBaseball(){
   const rec = {W:0, L:0, T:0}; let rf = 0, ra = 0;
   D.games.forEach(x => { const sc = score(x); rec[sc.res]++; rf += sc.us; ra += sc.them; });
   const roster = [...D.baseball.players].sort((a, b) => a.number - b.number).map(p =>
-    `<a class="player" href="#s-${pad2(p.seat)}">${isOpen(p.seat) ? '' : `<span class="lk" title="需要密碼">${icon('lock')}</span>`}<span class="jersey">${p.number}</span><span><b>${esc(kid(p.seat).nickname)}</b>${(p.positions || []).length ? `<small>${esc(p.positions.join('・'))}</small>` : ''}</span></a>`).join('');
+    `<a class="player" href="#s-${pad2(p.seat)}" aria-label="${p.seat} 號的個人頁${isOpen(p.seat) ? '' : '（需要密碼）'}">${isOpen(p.seat) ? '' : `<span class="lk" title="需要密碼">${icon('lock')}</span>`}${seatBadge(p.seat)}</a>`).join('');
   const locked = D.baseball.lock ? D.baseball.players.filter(p => !isOpen(p.seat)) : [];
   const bulk = locked.length ? `<form class="bulk" id="bulk-unlock"><span class="bulk-t">${icon('lock')}輸入密碼，打開球員個人頁（含照片）</span><span class="bulk-row"><input type="password" inputmode="numeric" autocomplete="off" aria-label="密碼" required><button class="btn" type="submit">解鎖</button></span><span class="lock-err" hidden>密碼不正確，請再試一次。</span></form>` : '';
-  const gameRows = list => `<div class="rows">${list.map(x => { const sc = score(x); return `<a class="row" href="#game-${esc(x.id)}"><span class="row-main"><small>${fmtD(x.date)}・${esc(x.event)}</small><b>${esc(gHead(x))}</b><span class="clamp">vs ${esc(x.opponent)}${x.slot ? '・' + esc(x.slot) : ''}</span></span><span class="score-chip"><span class="res ${sc.res}">${RES[sc.res]}</span>${sc.us}:${sc.them}</span></a>`; }).join('')}</div>`;
+  const gameRows = list => `<div class="rows">${list.map(x => { const sc = score(x); return `<a class="row" href="#game-${esc(x.id)}"><span class="row-main"><small>${fmtD(x.date)}・${esc(x.event)}</small><b>${rt(gHead(x))}</b><span class="clamp">vs ${esc(x.opponent)}${x.slot ? '・' + esc(x.slot) : ''}</span></span><span class="score-chip"><span class="res ${sc.res}">${RES[sc.res]}</span>${sc.us}:${sc.them}</span></a>`; }).join('')}</div>`;
   return B
     + band('', secHead('最新戰報') + story({topic:'baseball', date:g.date, title:gHead(g), href:`#game-${g.id}`, g}, gameBody(g))
       + `<div class="record"><div><b>${rec.W} 勝 ${rec.L} 敗${rec.T ? ` ${rec.T} 和` : ''}</b><span>目前戰績</span></div><div><b>${rf}</b><span>全隊得分</span></div><div><b>${D.games.length}</b><span>比賽場數</span></div></div>${tp ? `<p class="muted" style="margin:14px 0 0;font-size:.92rem">比賽照片和最新消息，也可以到<a href="${esc(tp)}" target="_blank" rel="noopener">${esc(s.teamPage.label || '球隊粉絲專頁')}</a>看看。</p>` : ''}`)
-    + band('alt', secHead('球員介紹', D.baseball.lock ? '點名字看個人紀錄（需要輸入密碼）' : '點名字看個人紀錄') + bulk + `<div class="roster">${roster}</div>`)
+    + band('alt', secHead('球員介紹', D.baseball.lock ? '點座號看個人紀錄（需要輸入密碼）' : '點座號看個人紀錄') + bulk + `<div class="roster">${roster}</div>`)
     + band('', secHead('比賽紀錄', '依盃賽分類，點開看每一場') + `<div class="folds">${groupBy(D.games, x => x.tournament || '其他比賽').map(([name, list]) => { const r = {W:0, L:0, T:0}; list.forEach(x => r[score(x).res]++); const meta = (D.baseball.tournaments || []).find(t => t.name === name); return fold(esc(name), `${list.length} 場・${r.W} 勝 ${r.L} 敗${r.T ? ` ${r.T} 和` : ''}${meta?.result ? '・' + esc(meta.result) : ''}`, () => gameRows(list)); }).join('')}${D.games.some(x => (x.batting || []).length) ? fold('數據排行榜', null, leadersHTML) : ''}${fold('棒球小辭典', null, GLOSS)}</div>`);
 }
 
@@ -1094,12 +1136,13 @@ function vGame(id){
   const lines = [...(g.batting || [])].sort((a, b) => a.order - b.order || (a.sub ? 1 : -1));
   return B + band('', `<a class="back" href="#baseball">← 回到球場表現</a><div class="stack">
       <div class="story-body"><p class="kicker t-berry">${fmtD(g.date)}（${wd(g.date)}）・${metaText(g)}</p>
-        <h2 class="story-title">${esc(gHead(g))}</h2>
+        <h2 class="story-title">${rt(gHead(g))}</h2>
         <p class="score-chip"><span class="res ${sc.res}">${RES[sc.res]}</span>${sc.us} : ${sc.them}　<span class="muted" style="font-family:var(--f-body);font-weight:400;font-size:1rem">vs ${esc(g.opponent)}</span></p></div>
       ${g.lineScore ? boardHTML(g) : ''}
-      <div class="report">${rep.paras.map(p => `<p>${esc(p)}</p>`).join('')}${rep.auto ? '<p class="auto-note">這篇戰報依比賽數據自動產生</p>' : g.reportBy ? `<p class="auto-note">戰報來源：${safeUrl(D.site.teamPage?.url) ? `<a href="${esc(D.site.teamPage.url)}" target="_blank" rel="noopener">${esc(g.reportBy)}</a>` : esc(g.reportBy)}</p>` : ''}</div>
+      <div class="report">${rep.paras.map(p => `<p>${rt(p)}</p>`).join('')}${rep.auto ? '<p class="auto-note">這篇戰報依比賽數據自動產生</p>' : g.reportBy ? `<p class="auto-note">戰報來源：${safeUrl(D.site.teamPage?.url) ? `<a href="${esc(D.site.teamPage.url)}" target="_blank" rel="noopener">${esc(g.reportBy)}</a>` : esc(g.reportBy)}</p>` : ''}</div>
       ${starHTML(g)}
-      ${g.comment ? `<figure class="note"><blockquote>${esc(g.comment)}</blockquote><figcaption>${esc(g.commentBy || '老師的話')}</figcaption></figure>` : ''}
+      ${g.comment ? `<figure class="note"><blockquote>${rt(tokNames(g.comment))}</blockquote><figcaption>${esc(g.commentBy || '老師的話')}</figcaption></figure>` : ''}
+      ${gamePhotosHTML(g)}
       ${links.length ? `<div><h3 class="sub-title">相關連結</h3><div class="rows">${links.map(l => `<a class="row" href="${esc(safeUrl(l.url))}" target="_blank" rel="noopener"><span class="row-main">${l.source ? `<small>${esc(l.source)}</small>` : ''}<b>${esc(l.title || l.url)}</b></span><span class="row-side">開啟 ↗</span></a>`).join('')}</div></div>` : ''}
     </div>`)
     + (!lines.length && !g.teamStats ? '' : band('alt', secHead('完整數據') + (!lines.length ? teamTable(g) : `<div class="stack"><div><h3 class="sub-title">打擊</h3>${batTable(lines, l => `<span class="muted">${l.sub ? '' : l.order + '　'}</span>${lineName(l)}${l.sub ? '<span class="muted">（替補）</span>' : ''}`)}</div>
@@ -1206,9 +1249,9 @@ function vPlayer(seat){
   if (!p) return banner('page', esc(D.site.teamName), '球員個人紀錄') + band('', '<a class="back" href="#baseball">← 回到球場表現</a><div class="empty"><p>找不到這位球員。</p></div>');
   const team = [...D.baseball.players].sort((a, b) => a.number - b.number);
   const i = team.indexOf(p), prev = team[i-1], next = team[i+1];
-  const pager = `<nav class="pager" aria-label="切換球員">${prev ? `<a href="#s-${pad2(prev.seat)}">← #${prev.number} ${esc(kid(prev.seat).nickname)}</a>` : '<a href="#baseball">← 回到球場表現</a>'}${next ? `<a href="#s-${pad2(next.seat)}">#${next.number} ${esc(kid(next.seat).nickname)} →</a>` : '<a href="#baseball">回到球場表現 →</a>'}</nav>`;
+  const pager = `<nav class="pager" aria-label="切換球員">${prev ? `<a href="#s-${pad2(prev.seat)}" aria-label="上一位：${prev.seat} 號">←${seatBadge(prev.seat)}</a>` : '<a href="#baseball">← 回到球場表現</a>'}${next ? `<a href="#s-${pad2(next.seat)}" aria-label="下一位：${next.seat} 號">${seatBadge(next.seat)}→</a>` : '<a href="#baseball">回到球場表現 →</a>'}</nav>`;
   if (!isOpen(seat)) return banner('page', esc(D.site.teamName), '球員個人紀錄') + band('', pager
-    + `<div class="who"><span class="jersey">${p.number}</span><div><h2>${esc(k.nickname)}</h2></div></div>` + lockForm(seat));
+    + `<div class="who">${seatBadge(seat)}<div><h2>${+seat} 號</h2></div></div>` + lockForm(seat));
 
   const blog = D.games.flatMap(g => g.batting.filter(b => b.seat === seat).map(b => ({...b, g})));
   const plog = D.games.flatMap(g => g.pitching.filter(x => x.seat === seat).map(x => ({...x, g})));
@@ -1225,6 +1268,20 @@ function vPlayer(seat){
     return [['打數', has ? t.ab : '—'], ['打擊率', has ? avg(t) : '—'], ['安打', has ? t.h : '—'], ['打點', has ? t.rbi : '—'], ['盜壘', has ? t.sb : '—'], ['OPS', ops]]
       .map(([l, v]) => `<div><span>${l}</span><b>${v}</b></div>`).join('');
   };
+  // 投手數據（仿 MLB.com 投手頁：出賽、勝-敗、防禦率、局數、三振、WHIP）
+  const pCells = list => {
+    const t = sumPit(list), has = list.length;
+    const w = list.filter(l => l.dec === 'W').length, lo = list.filter(l => l.dec === 'L').length;
+    const whip = has && t.outs ? ((t.bb + t.h) * 3 / t.outs).toFixed(2) : '—';
+    return [['出賽', has ? list.length : '—'], ['勝-敗', has ? `${w}-${lo}` : '—'], ['防禦率', has ? era(t.er, t.outs) : '—'], ['局數', has ? ipStr(t.outs) : '—'], ['三振', has ? t.so : '—'], ['WHIP', whip]]
+      .map(([l, v]) => `<div><span>${l}</span><b>${v}</b></div>`).join('');
+  };
+  const pRecent = plog.slice(0, 3);
+  const pCols = [['ip','局數'],['pitches','用球數'],['h','被安打'],['r','失分'],['er','自責分'],['bb','四壞'],['so','三振']];
+  const pRole = l => l.g.pitching[0]?.seat === seat ? '先發' : '後援';  // pitching[] 第一位是先發投手
+  const pRecentTable = `<div class="tscroll"><table class="stat"><thead><tr><th class="l sticky">比賽</th><th>角色</th>${pCols.map(c => `<th>${c[1]}</th>`).join('')}<th>勝敗</th></tr></thead><tbody>
+    ${pRecent.length ? pRecent.map(l => `<tr><td class="l sticky">${gl(l)}</td><td>${pRole(l)}</td>${pCols.map(([c]) => `<td>${c === 'ip' ? ipStr(outsOf(l.ip)) : c === 'pitches' ? (l.pitches || '—') : (l[c] || 0)}</td>`).join('')}<td>${DEC[l.dec] ? `<span class="dec">${DEC[l.dec]}</span>` : '—'}</td></tr>`).join('')
+      : `<tr><td class="l sticky pl-none" colspan="${pCols.length + 3}">登錄投球紀錄後，最近三場會顯示在這裡。</td></tr>`}</tbody></table></div>`;
   const recent = blog.slice(0, 3);
   const rCols = [['ab','打數'],['r','得分'],['h','安打'],['rbi','打點'],['bb','四壞'],['so','三振'],['sb','盜壘']];
   const recentTable = `<div class="tscroll"><table class="stat"><thead><tr><th class="l sticky">比賽</th>${rCols.map(c => `<th>${c[1]}</th>`).join('')}</tr></thead><tbody>
@@ -1249,13 +1306,20 @@ function vPlayer(seat){
         </div>
       </div>
     </div></header>`;
-  const tabs = `<nav class="pl-tabs wrap" aria-label="個人頁目錄"><button type="button" data-jump="pl-stats">數據</button><button type="button" data-jump="pl-team">球隊戰績</button><button type="button" data-jump="pl-bio">小檔案</button><button type="button" data-jump="pl-notes">精選心得${picks.length ? ` <small>${picks.length}</small>` : ''}</button></nav>`;
+  const tabs = `<nav class="pl-tabs wrap" aria-label="個人頁目錄"><button type="button" data-jump="pl-stats">打擊數據</button><button type="button" data-jump="pl-pitch">投手數據</button><button type="button" data-jump="pl-team">球隊戰績</button><button type="button" data-jump="pl-bio">小檔案</button><button type="button" data-jump="pl-notes">精選心得${picks.length ? ` <small>${picks.length}</small>` : ''}</button></nav>`;
   const stats = `<section id="pl-stats" class="pl-sec">${secHead('打擊數據', blog.length ? '' : '個人數據還沒登錄，先用「—」表示')}
       <div class="pl-boxes"><div class="pl-box"><h3>${syLabel}</h3><div class="pl-cells">${cells(blog.filter(l => inSY(l.g.date)))}</div></div>
         <div class="pl-box"><h3>國中生涯</h3><div class="pl-cells">${cells(blog)}</div></div></div>
       <h3 class="pl-sub">最近三場</h3>${recentTable}
       ${blog.length ? `<h3 class="pl-sub">打擊率走勢</h3>${avgChart(blog)}` : ''}
-      ${blog.length || plog.length ? `<div class="folds" style="margin-top:18px">${blog.length ? fold('每場打擊紀錄', `${blog.length} 場`, () => batTable(blog, gl, '比賽')) : ''}${plog.length ? fold('投球紀錄', `${plog.length} 場`, () => pitTable(plog, gl, '比賽')) : ''}</div>` : ''}
+      ${blog.length ? `<div class="folds" style="margin-top:18px">${fold('每場打擊紀錄', `${blog.length} 場`, () => batTable(blog, gl, '比賽'))}</div>` : ''}
+    </section>
+    <section id="pl-pitch" class="pl-sec pl-pitch">${secHead('投手數據', plog.length ? '' : '還沒有投球紀錄，先用「—」表示')}
+      <div class="pl-boxes"><div class="pl-box"><h3>${syLabel}</h3><div class="pl-cells">${pCells(plog.filter(l => inSY(l.g.date)))}</div></div>
+        <div class="pl-box"><h3>國中生涯</h3><div class="pl-cells">${pCells(plog)}</div></div></div>
+      <h3 class="pl-sub">最近三場</h3>${pRecentTable}
+      ${plog.length ? `<div class="folds" style="margin-top:18px">${fold('每場投球紀錄', `${plog.length} 場`, () => pitTable(plog, gl, '比賽'))}</div>` : ''}
+      <p class="pl-foot">防禦率以每場 ${D.site.inningsPerGame} 局計算；WHIP＝（被安打＋四壞）÷ 局數，代表平均每局讓幾位打者上壘。</p>
     </section>`;
   const teamSec = trophies ? `<section id="pl-team" class="pl-sec">${secHead('球隊戰績', '和球隊一起打下的成績')}<ul class="pl-trophies">${trophies}</ul></section>` : '';
   const bio = `<section id="pl-bio" class="pl-sec">${secHead('球員小檔案')}
@@ -1277,16 +1341,16 @@ function buildIndex(){
   for (const r of D.reading){
     I.push({kind:'閱讀心得', tone:'leaf', date:r.date, title:r.title, sub:r.theme, href:`#read-${r.id}`,
       text:[r.summary, r.content, r.note, ...(r.questions || []).map(q => q.text), r.task?.topic, r.task?.text, ...(r.sources || []).map(s => s.name)].filter(Boolean).join('\n')});
-    for (const x of r.reflections || []) I.push({kind:'精選心得', tone:'leaf', date:r.date, title:`${pad2(x.seat)} ${kid(x.seat).nickname} 的心得`, sub:r.title, href:`#read-${r.id}~${pad2(x.seat)}`, text:x.text});
+    for (const x of r.reflections || []) I.push({kind:'精選心得', tone:'leaf', date:r.date, title:`${TK(x.seat)} 的心得`, sub:r.title, href:`#read-${r.id}~${pad2(x.seat)}`, text:x.text});
   }
   for (const p of D.parents) I.push({kind:'親職文章', tone:'plum', date:p.date, title:p.title, sub:p.series, href:`#letter-${p.id}`, text:[p.summary, plain(p.body), p.article?.title].filter(Boolean).join('\n')});
   for (const a of D.activities){
     I.push({kind:'活動點滴', tone:'sun', date:a.date, title:a.title, sub:a.type, href:`#act-${a.id}`, text:[a.description, ...(a.highlights || []), ...(a.photos || []).map(x => x.caption), ...(a.videos || []).map(x => x.caption), a.reflectPrompt].filter(Boolean).join('\n')});
-    for (const x of a.reflections || []) I.push({kind:'精選心得', tone:'leaf', date:a.date, title:`${pad2(x.seat)} ${kid(x.seat).nickname} 的心得`, sub:a.title, href:`#act-${a.id}~${pad2(x.seat)}`, text:x.text});
+    for (const x of a.reflections || []) I.push({kind:'精選心得', tone:'leaf', date:a.date, title:`${TK(x.seat)} 的心得`, sub:a.title, href:`#act-${a.id}~${pad2(x.seat)}`, text:x.text});
   }
   for (const g of D.games) I.push({kind:'球場表現', tone:'berry', date:g.date, title:gHead(g), sub:`${g.tournament || g.event || ''}`, href:`#game-${g.id}`,
-    text:[`vs ${g.opponent}`, g.event, g.slot, g.venue, ...gReport(g).paras, g.comment].filter(Boolean).join('\n')});
-  for (const p of D.baseball.players) I.push({kind:'球員', tone:'berry', date:'', title:`#${p.number} ${kid(p.seat).nickname}`, sub:(p.positions || []).join('・'), href:`#s-${pad2(p.seat)}`, text:kid(p.seat).nickname});
+    text:[`vs ${g.opponent}`, g.event, g.slot, g.venue, ...gReport(g).paras, g.comment, ...(g.photos || []).map(x => x.caption)].filter(Boolean).join('\n')});
+  for (const p of D.baseball.players) I.push({kind:'球員', tone:'berry', date:'', title:TK(p.seat), sub:(p.positions || []).join('・'), href:`#s-${pad2(p.seat)}`, text:`座號 ${pad2(p.seat)}・${p.seat} 號`});
   return I;
 }
 const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -1300,9 +1364,12 @@ function snippet(text, terms){
   const low = t.toLowerCase();
   let at = -1;
   for (const w of terms){ const i = low.indexOf(w.toLowerCase()); if (i >= 0 && (at < 0 || i < at)) at = i; }
-  if (at < 0) return esc(t.slice(0, 70)) + (t.length > 70 ? '…' : '');
-  const a = Math.max(0, at - 24), b = Math.min(t.length, at + 70);
-  return (a ? '…' : '') + hl(t.slice(a, b), terms) + (b < t.length ? '…' : '');
+  // 擷取片段時不要把座號記號切成兩半
+  const fitB = b => { const o = t.lastIndexOf('\uE000', b - 1); if (o >= 0){ const c = t.indexOf('\uE001', o); if (c >= b) return c + 1; } return b; };
+  const fitA = a => { const o = t.lastIndexOf('\uE000', a - 1); return o >= 0 && t.indexOf('\uE001', o) >= a ? o : a; };
+  if (at < 0){ const e = fitB(Math.min(t.length, 70)); return tk(esc(t.slice(0, e))) + (e < t.length ? '…' : ''); }
+  const a = fitA(Math.max(0, at - 24)), b = fitB(Math.min(t.length, at + 70));
+  return (a ? '…' : '') + tk(hl(t.slice(a, b), terms)) + (b < t.length ? '…' : '');
 }
 function searchHits(q){
   INDEX = INDEX || buildIndex();
@@ -1327,7 +1394,7 @@ function resultsHTML(q){
   if (!hits.length) return `<div class="empty"><p>找不到「${esc(q)}」相關的內容，換個關鍵字試試：</p><div class="sugg">${SUGG.map(w => `<a class="chip" href="#search=${encodeURIComponent(w)}">${esc(w)}</a>`).join('')}</div></div>`;
   const groups = KINDS.map(k => [k, hits.filter(x => x.kind === k)]).filter(([, l]) => l.length);
   return `<p class="res-count">「${esc(q)}」共找到 ${hits.length} 筆</p>` + groups.map(([k, list]) => `<h3 class="res-h t-${list[0].tone}">${k}<small>${list.length} 筆</small></h3><div class="rows">${list.map(x =>
-    `<a class="row" href="${x.href}"><span class="row-main"><small>${x.date ? fmtD(x.date) : ''}${x.sub ? (x.date ? '・' : '') + esc(x.sub) : ''}</small><b>${hl(x.title, terms)}</b><span class="clamp">${snippet(x.text, terms)}</span></span></a>`).join('')}</div>`).join('');
+    `<a class="row" href="${x.href}"><span class="row-main"><small>${x.date ? fmtD(x.date) : ''}${x.sub ? (x.date ? '・' : '') + esc(x.sub) : ''}</small><b>${tk(hl(x.title, terms))}</b><span class="clamp">${snippet(x.text, terms)}</span></span></a>`).join('')}</div>`).join('');
 }
 function vSearch(q){
   return banner('page', '搜尋', '找文章、心得、親職文章、活動和比賽。')
@@ -1408,7 +1475,7 @@ function lbClose(){ if (!LB) return; const o = LB.opener; LB = null; $('#lb').hi
 function lbStep(d){ if (LB){ LB.i = (LB.i + d + LB.photos.length) % LB.photos.length; lbShow(); } }
 $('#view').addEventListener('click', e => {
   const b = e.target.closest('.ph'); if (!b) return;
-  const a = D.activities.find(x => x.id === b.dataset.g); if (a) lbOpen(a.photos, +b.dataset.i, b);
+  const a = D.activities.find(x => x.id === b.dataset.g) || D.games.find(x => x.id === b.dataset.g); if (a) lbOpen(a.photos, +b.dataset.i, b);
 });
 $('#view').addEventListener('click', e => {
   const b = e.target.closest('.vid-btn'); if (!b) return;
