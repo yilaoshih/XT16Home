@@ -338,6 +338,8 @@ a.row:hover{transform:translateY(-3px);border-left-color:var(--berry);box-shadow
 .paper-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
 .paper-title{font-family:var(--f-head);font-weight:900;letter-spacing:-.02em;font-size:clamp(1.8rem,5.4vw,2.5rem);line-height:1.28;color:var(--head);margin:10px 0 6px;text-wrap:balance}
 .paper-src{margin:0 0 20px;font-size:.9rem;color:var(--ink-2)}
+.paper-fig{margin:0 0 24px;border-radius:var(--r);overflow:hidden;aspect-ratio:16/9;background:var(--band)}
+.paper-fig img{display:block;width:100%;height:100%;object-fit:cover}
 .prose{border-top:1px solid var(--rule);padding-top:22px}
 .prose p{margin:0 0 1.1em;font-size:1.06rem;line-height:2}
 .prose p:last-child{margin-bottom:0}
@@ -872,7 +874,11 @@ function news(){
 const TOPIC = {baseball:['球場表現','berry'], reading:['閱讀心得','leaf'], gallery:['活動點滴','sun'], parents:['親職文章','plum']};
 function cover(it, size){
   if (it.topic === 'baseball'){ const s = score(it.g); return `<div class="cover ${size} t-berry"><span class="res ${s.res}">${RES[s.res]}</span><b class="cv-score">${s.us}<i>:</i>${s.them}</b><span class="cv-sub">vs ${esc(it.g.opponent)}</span></div>`; }
-  if (it.topic === 'reading') return `<div class="cover ${size} t-leaf">${icon('book')}<span class="cv-sub">${esc(it.r.theme || '閱讀')}</span></div>`;
+  if (it.topic === 'reading'){
+    const rc = it.r.cover;
+    if (rc && rc.src) return `<div class="cover ${size} photo t-leaf"><img src="${esc(size === 'sm' ? (rc.thumb || rc.src) : rc.src)}" alt="${esc(rc.alt || it.r.title)}" loading="lazy" style="object-position:${esc(rc.position || '50% 50%')}"><span class="cv-tag">${esc(it.r.theme || '閱讀')}</span></div>`;
+    return `<div class="cover ${size} t-leaf">${icon('book')}<span class="cv-sub">${esc(it.r.theme || '閱讀')}</span></div>`;
+  }
   if (it.topic === 'parents') return `<div class="cover ${size} t-plum">${icon('letter')}<span class="cv-sub">${esc(it.p.series || '親職文章')}</span></div>`;
   const c = it.a.cover;
   if (c && c.src) return `<div class="cover ${size} photo t-${actTone(it.a.type)}"><img src="${esc(size === 'sm' ? (c.thumb || c.src) : c.src)}" alt="${esc(c.alt || it.a.title)}" loading="lazy" style="object-position:${esc(c.position || '50% 50%')}"><span class="cv-tag">${esc(it.a.type)}</span></div>`;
@@ -943,6 +949,7 @@ function vReading(id, focus){
       <div class="paper-meta"><p class="kicker">${isLatest ? '最新一篇・' : ''}${fmtD(r.date)}（${wd(r.date)}）</p>${r.theme ? `<span class="chip">${esc(r.theme)}</span>` : ''}</div>
       <h2 class="paper-title">${esc(r.title)}</h2>
       ${src || link ? `<p class="paper-src">${src}${link ? `${src ? '　' : ''}<a href="${esc(link)}" target="_blank" rel="noopener">原文連結</a>` : ''}</p>` : ''}
+      ${r.cover && r.cover.src ? `<figure class="paper-fig"><img src="${esc(r.cover.src)}"${r.cover.thumb ? ` srcset="${esc(r.cover.thumb)} 640w, ${esc(r.cover.src)} 1376w" sizes="(max-width: 720px) 100vw, 760px"` : ''} alt="${esc(r.cover.alt || r.title)}" style="object-position:${esc(r.cover.position || '50% 50%')}"></figure>` : ''}
       <div class="prose">${paras(r.content || r.summary).map(p => `<p>${esc(p)}</p>`).join('')}</div>
       ${r.note ? `<aside class="paper-note"><p class="paper-note-h">補充說明</p>${paras(r.note).map(t => `<p>${esc(t)}</p>`).join('')}</aside>` : ''}
       ${qs.length ? `<section class="think"><h3>${esc(r.questionsTitle || '思考題')}</h3>${qs.map(q => `<div class="q"><p class="q-label">${esc(q.label || '')}${q.kind ? `<span class="chip">${esc(q.kind)}</span>` : ''}</p><p>${esc(q.text)}</p></div>`).join('')}</section>` : ''}
