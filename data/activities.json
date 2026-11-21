@@ -191,25 +191,77 @@
     "id": "a261117",
     "date": "2026-11-17",
     "type": "校園活動",
-    "title": "身體界線與自我保護講座",
-    "description": "11 月 17 日，講師來到教室上一堂「何謂身體自主權與身體界線」。投影片打在黑板旁邊，全班坐在自己的位子上聽講，有人拿著筆、有人托著下巴，一起想想什麼是自己的身體界線。",
+    "title": "身體界線與自我保護",
+    "description": "11 月 17 日，老師在教室上和我們討論「何謂身體自主權與身體界線」，在老師的講述中，全班坐在自己的位子上聽講，有人拿著筆、有人托著下巴，一起想想什麼是自己的身體界線。",
     "highlights": [],
     "cover": {
       "src": "images/a261117/cover.jpg",
       "thumb": "images/a261117/cover-s.jpg",
-      "alt": "講師指著投影片，上面寫著「何謂身體自主權與身體界線」",
+      "alt": "老師指著投影片，上面寫著「何謂身體自主權與身體界線」",
       "position": "50% 45%"
     },
     "photos": [
       {
         "src": "images/a261117/01.jpg",
         "thumb": "images/a261117/01-s.jpg",
-        "caption": "講師指著投影片，和大家談「身體自主權」與「身體界線」"
+        "caption": "老師指著投影片，和大家談「身體自主權」與「身體界線」"
       },
       {
         "src": "images/a261117/02.jpg",
         "thumb": "images/a261117/02-s.jpg",
         "caption": "整間教室坐得滿滿的，一起上這堂課"
+      }
+    ],
+    "albumUrl": ""
+  },
+  {
+    "id": "a261119",
+    "date": "2026-11-19",
+    "type": "校園活動",
+    "title": "防災演練",
+    "description": "11 月 19 日，全校進行地震演練。大家把背包舉到頭上護住頭部，跟著隊伍沿著穿廊疏散到籃球場集合，坐下來清點人數。不少同學還對著鏡頭比 YA。",
+    "highlights": [],
+    "cover": {
+      "src": "images/a261119/cover.jpg",
+      "thumb": "images/a261119/cover-s.jpg",
+      "alt": "疏散到籃球場後，全班坐在地上集合，對著鏡頭比 YA",
+      "position": "50% 60%"
+    },
+    "photos": [
+      {
+        "src": "images/a261119/01.jpg",
+        "thumb": "images/a261119/01-s.jpg",
+        "caption": "背包舉在頭上護住頭，跟著隊伍沿著穿廊往外走"
+      },
+      {
+        "src": "images/a261119/02.jpg",
+        "thumb": "images/a261119/02-s.jpg",
+        "caption": "背包壓低護住頭，只露出一隻眼睛"
+      },
+      {
+        "src": "images/a261119/03.jpg",
+        "thumb": "images/a261119/03-s.jpg",
+        "caption": "一個跟著一個，雙手扶好頭上的背包"
+      },
+      {
+        "src": "images/a261119/04.jpg",
+        "thumb": "images/a261119/04-s.jpg",
+        "caption": "背包頂在頭上，排好隊往集合場移動"
+      },
+      {
+        "src": "images/a261119/05.jpg",
+        "thumb": "images/a261119/05-s.jpg",
+        "caption": "疏散途中，還是記得對鏡頭比 YA"
+      },
+      {
+        "src": "images/a261119/06.jpg",
+        "thumb": "images/a261119/06-s.jpg",
+        "caption": "大家護著頭，從大柱子旁邊快步走過"
+      },
+      {
+        "src": "images/a261119/07.jpg",
+        "thumb": "images/a261119/07-s.jpg",
+        "caption": "到了籃球場坐下集合，一位同學拿著紙筆清點人數"
       }
     ],
     "albumUrl": ""
