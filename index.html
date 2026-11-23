@@ -931,7 +931,7 @@ function vContact(){
 
 // ---------- 閱讀心得 ----------
 function noteHTML(x, focus){
-  return `<figure class="note${focus === x.seat ? ' focus' : ''}" data-seat="${x.seat}"><blockquote>${paras(x.text).map(t => `<p>${esc(t)}</p>`).join('')}</blockquote><figcaption>${seatBadge(x.seat)}</figcaption></figure>`;
+  return `<figure class="note${focus === x.seat ? ' focus' : ''}" data-seat="${x.seat}"><blockquote>${paras(x.text).map(t => `<p>${rt(tokNames(t))}</p>`).join('')}</blockquote><figcaption>${seatBadge(x.seat)}</figcaption></figure>`;
 }
 function vReading(id, focus){
   const B = banner('page', '閱讀心得', '聯絡簿上每週的閱讀文章，和老師精選的同學心得。');
@@ -1342,7 +1342,7 @@ function vPlayer(seat){
       ${p.profile ? `<div class="pl-intro">${paras(p.profile).map(t => `<p>${esc(t)}</p>`).join('')}</div>` : '<div class="pl-intro tbd-box"><p>這裡可以放一段球員介紹：老師的觀察、教練的評語，或是球員自己寫的一段話。</p></div>'}
     </section>`;
   const notes = `<section id="pl-notes" class="pl-sec">${secHead('精選心得', '老師從聯絡簿札記和活動心得選出的文章')}
-      ${picks.length ? `<div class="rows">${picks.map(({date, href, tag, title, x}) => `<a class="row" href="${esc(href)}"><span class="row-main"><small>${fmtD(date)}${tag ? '・' + esc(tag) : ''}</small><b>${esc(title)}</b><span class="clamp">${esc(paras(x.text).join(' '))}</span></span><span class="row-side">讀心得 →</span></a>`).join('')}</div>`
+      ${picks.length ? `<div class="rows">${picks.map(({date, href, tag, title, x}) => `<a class="row" href="${esc(href)}"><span class="row-main"><small>${fmtD(date)}${tag ? '・' + esc(tag) : ''}</small><b>${esc(title)}</b><span class="clamp">${rt(tokNames(paras(x.text).join(' ')))}</span></span><span class="row-side">讀心得 →</span></a>`).join('')}</div>`
         : '<div class="empty"><p>還沒有精選心得。</p></div>'}
     </section>`;
   return hero + tabs + band('', stats) + (teamSec ? band('alt', teamSec) : '') + band(teamSec ? '' : 'alt', bio) + band(teamSec ? 'alt' : '', notes);
@@ -1356,12 +1356,12 @@ function buildIndex(){
   for (const r of D.reading){
     I.push({kind:'閱讀心得', tone:'leaf', date:r.date, title:r.title, sub:r.theme, href:`#read-${r.id}`,
       text:[r.summary, r.content, r.note, ...(r.questions || []).map(q => q.text), r.task?.topic, r.task?.text, ...(r.sources || []).map(s => s.name)].filter(Boolean).join('\n')});
-    for (const x of r.reflections || []) I.push({kind:'精選心得', tone:'leaf', date:r.date, title:`${TK(x.seat)} 的心得`, sub:r.title, href:`#read-${r.id}~${pad2(x.seat)}`, text:x.text});
+    for (const x of r.reflections || []) I.push({kind:'精選心得', tone:'leaf', date:r.date, title:`${TK(x.seat)} 的心得`, sub:r.title, href:`#read-${r.id}~${pad2(x.seat)}`, text:tokNames(x.text)});
   }
   for (const p of D.parents) I.push({kind:'親職文章', tone:'plum', date:p.date, title:p.title, sub:p.series, href:`#letter-${p.id}`, text:[p.summary, plain(p.body), p.article?.title].filter(Boolean).join('\n')});
   for (const a of D.activities){
     I.push({kind:'活動點滴', tone:'sun', date:a.date, title:a.title, sub:a.type, href:`#act-${a.id}`, text:[a.description, ...(a.highlights || []), ...(a.photos || []).map(x => x.caption), ...(a.videos || []).map(x => x.caption), a.reflectPrompt].filter(Boolean).join('\n')});
-    for (const x of a.reflections || []) I.push({kind:'精選心得', tone:'leaf', date:a.date, title:`${TK(x.seat)} 的心得`, sub:a.title, href:`#act-${a.id}~${pad2(x.seat)}`, text:x.text});
+    for (const x of a.reflections || []) I.push({kind:'精選心得', tone:'leaf', date:a.date, title:`${TK(x.seat)} 的心得`, sub:a.title, href:`#act-${a.id}~${pad2(x.seat)}`, text:tokNames(x.text)});
   }
   for (const g of D.games) I.push({kind:'球場表現', tone:'berry', date:g.date, title:gHead(g), sub:`${g.tournament || g.event || ''}`, href:`#game-${g.id}`,
     text:[`vs ${g.opponent}`, g.event, g.slot, g.venue, ...gReport(g).paras, g.comment, ...(g.photos || []).map(x => x.caption)].filter(Boolean).join('\n')});
