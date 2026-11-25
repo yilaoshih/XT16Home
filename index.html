@@ -137,8 +137,13 @@ mark{background:var(--sun-soft);color:inherit;border-radius:3px;padding:0 1px;bo
 .pl-num{font-family:var(--f-num);font-weight:700;color:var(--bulb);font-size:.8em;margin-left:.3em;letter-spacing:0}
 .pl-facts{display:flex;flex-wrap:wrap;gap:10px 0;margin:0}
 .pl-facts div{padding:0 18px;border-left:1px solid var(--board-line)}
-.pl-facts div:first-child{padding-left:0;border-left:0;flex-basis:100%}
-.pl-facts div:nth-child(2){padding-left:0;border-left:0}
+.pl-facts div:first-child{padding-left:0;border-left:0}
+.pl-facts .f-pos dd{max-width:8.5em}
+.pl-facts .nw{white-space:nowrap}
+@media (max-width:1200px){
+  .pl-facts{display:grid;grid-template-columns:repeat(2,max-content);gap:8px 28px}
+  .pl-facts div{padding:0;border:0}
+}
 .pl-facts dt{font-size:.78rem;color:var(--chalk-2)}
 .pl-facts dd{margin:2px 0 0;font-family:var(--f-num);font-weight:600;font-size:1.15rem;letter-spacing:.02em}
 .pl-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--rule)}
@@ -547,9 +552,6 @@ footer a{color:var(--hero-ink)}
   .paper{padding:24px 22px}
   .pl-boxes{grid-template-columns:minmax(0,1fr)}
   .pl-bio{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .pl-facts{display:grid;grid-template-columns:repeat(2,max-content);gap:8px 28px}
-  .pl-facts div,.pl-facts div:first-child,.pl-facts div:nth-child(2){padding:0;border:0}
-  .pl-facts div:first-child{grid-column:1/-1}
 }
 @media (max-width:640px){
   .topbar .wrap{gap:0}
@@ -573,8 +575,8 @@ footer a{color:var(--hero-ink)}
   .pl-name h2{margin-bottom:10px}
   .pl-facts{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:8px 12px}
   .pl-facts div,.pl-facts div:first-child{padding:0;border:0}
-  .pl-facts div:first-child{grid-column:1/-1}
   .pl-facts dd{font-size:.95rem;white-space:nowrap}
+  .pl-facts .f-pos dd{white-space:normal;max-width:none}
   .pl-cells{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:10px}
   .pl-mark{width:220px;height:220px;right:-50px;bottom:-60px}
   .player{flex-direction:column;gap:4px;padding:10px 4px;text-align:center}
@@ -1300,7 +1302,6 @@ function vPlayer(seat){
   const plog = D.games.flatMap(g => g.pitching.filter(x => x.seat === seat).map(x => ({...x, g})));
   const gl = l => `<a href="#game-${esc(l.g.id)}">${md(l.g.date)} ${esc(l.g.opponent)}</a>`;
   const pos = (p.positions || []).join('・');
-  const cls = (D.site.classFull || '').replace(D.site.teamShort || '新泰國中', '').trim() || '—';
   // 學年：8 月開始算新學年
   const last = D.games[0]?.date || new Date().toISOString().slice(0, 10);
   const y0 = +last.slice(0, 4) - (+last.slice(5, 7) < 8 ? 1 : 0);
@@ -1347,7 +1348,7 @@ function vPlayer(seat){
         <figure class="pl-photo">${p.photo ? encImg(p, '', k.nickname + ' 的照片') : '<img src="images/players/default.svg" alt="照片待補">'}<figcaption>照片待補</figcaption></figure>
         <div class="pl-name"><p class="pl-team">${esc(D.site.teamName)}</p>
           <h2>${sec('name', k.nickname)}<span class="pl-num">#${p.number}</span></h2>
-          <dl class="pl-facts"><div><dt>守備位置</dt><dd>${pos ? esc(pos) : '—'}</dd></div><div><dt>生日</dt><dd>${sec('birthday', '—')}</dd></div><div><dt>投／打</dt><dd>${esc(p.bt || '—')}</dd></div><div><dt>班級</dt><dd>${esc(cls)}</dd></div><div><dt>座號</dt><dd>${pad2(seat)}</dd></div></dl>
+          <dl class="pl-facts"><div><dt>生日</dt><dd>${sec('birthday', '—')}</dd></div><div><dt>投／打</dt><dd>${esc(p.bt || '—')}</dd></div><div class="f-pos"><dt>守備位置</dt><dd>${pos ? (p.positions || []).map(x => `<span class="nw">${esc(x)}</span>`).join('・') : '—'}</dd></div><div><dt>座號</dt><dd>${pad2(seat)}</dd></div></dl>
         </div>
       </div>
     </div></header>`;
@@ -1368,7 +1369,7 @@ function vPlayer(seat){
     </section>`;
   const teamSec = trophies ? `<section id="pl-team" class="pl-sec">${secHead('球隊戰績', '和球隊一起打下的成績')}<ul class="pl-trophies">${trophies}</ul></section>` : '';
   const bio = `<section id="pl-bio" class="pl-sec">${secHead('球員小檔案')}
-      <dl class="pl-bio"><div><dt>姓名</dt><dd>${sec('name')}</dd></div>${fact('稱呼', k.nickname)}<div><dt>生日</dt><dd>${sec('birthday')}</dd></div>${fact('背號', '#' + p.number)}${fact('守備位置', pos)}${fact('投／打', p.bt)}${fact('班級', cls === '—' ? '' : cls)}${fact('我的目標', p.goal)}</dl>
+      <dl class="pl-bio">${fact('稱呼', k.nickname)}<div><dt>生日</dt><dd>${sec('birthday')}</dd></div>${fact('背號', '#' + p.number)}${fact('守備位置', pos)}${fact('投／打', p.bt)}${fact('我的目標', p.goal)}</dl>
       ${p.profile ? `<div class="pl-intro">${paras(p.profile).map(t => `<p>${esc(t)}</p>`).join('')}</div>` : '<div class="pl-intro tbd-box"><p>這裡可以放一段球員介紹：老師的觀察、教練的評語，或是球員自己寫的一段話。</p></div>'}
     </section>`;
   const notes = `<section id="pl-notes" class="pl-sec">${secHead('精選心得', '老師從聯絡簿札記和活動心得選出的文章')}
