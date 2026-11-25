@@ -137,7 +137,8 @@ mark{background:var(--sun-soft);color:inherit;border-radius:3px;padding:0 1px;bo
 .pl-num{font-family:var(--f-num);font-weight:700;color:var(--bulb);font-size:.8em;margin-left:.3em;letter-spacing:0}
 .pl-facts{display:flex;flex-wrap:wrap;gap:10px 0;margin:0}
 .pl-facts div{padding:0 18px;border-left:1px solid var(--board-line)}
-.pl-facts div:first-child{padding-left:0;border-left:0}
+.pl-facts div:first-child{padding-left:0;border-left:0;flex-basis:100%}
+.pl-facts div:nth-child(2){padding-left:0;border-left:0}
 .pl-facts dt{font-size:.78rem;color:var(--chalk-2)}
 .pl-facts dd{margin:2px 0 0;font-family:var(--f-num);font-weight:600;font-size:1.15rem;letter-spacing:.02em}
 .pl-tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--rule)}
@@ -546,6 +547,9 @@ footer a{color:var(--hero-ink)}
   .paper{padding:24px 22px}
   .pl-boxes{grid-template-columns:minmax(0,1fr)}
   .pl-bio{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pl-facts{display:grid;grid-template-columns:repeat(2,max-content);gap:8px 28px}
+  .pl-facts div,.pl-facts div:first-child,.pl-facts div:nth-child(2){padding:0;border:0}
+  .pl-facts div:first-child{grid-column:1/-1}
 }
 @media (max-width:640px){
   .topbar .wrap{gap:0}
@@ -567,9 +571,10 @@ footer a{color:var(--hero-ink)}
   .pl-photo{width:112px;border-width:3px;border-radius:8px}
   .pl-photo figcaption{font-size:.68rem}
   .pl-name h2{margin-bottom:10px}
-  .pl-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px}
+  .pl-facts{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:8px 12px}
   .pl-facts div,.pl-facts div:first-child{padding:0;border:0}
-  .pl-facts dd{font-size:1rem}
+  .pl-facts div:first-child{grid-column:1/-1}
+  .pl-facts dd{font-size:.95rem;white-space:nowrap}
   .pl-cells{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:10px}
   .pl-mark{width:220px;height:220px;right:-50px;bottom:-60px}
   .player{flex-direction:column;gap:4px;padding:10px 4px;text-align:center}
@@ -1236,7 +1241,29 @@ async function unlockMany(seats, pw){
   if (!ok.length) return ok;
   const raw = await photoKey(pw);
   for (const s of ok){ markOpen(s); rememberKey(s, raw); }
+  await Promise.all(ok.map(openSecret));  // 先解開全名和生日，個人頁一打開就是全名
   return ok;
+}
+// 全名和生日用同一把金鑰加密（players[].secret），解鎖後才在瀏覽器解開；資料檔裡沒有明文
+const SECRETS = new Map();
+const secOf = (seat, f) => SECRETS.get(+seat)?.[f];
+async function openSecret(seat){
+  if (SECRETS.has(+seat)) return SECRETS.get(+seat);
+  const p = plr(seat), raw = keyOf(seat);
+  if (!p?.secret || !raw) return null;
+  try {
+    const key = await crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['decrypt']);
+    const plain = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(p.secret.iv)}, key, b64(p.secret.ct));
+    const s = JSON.parse(new TextDecoder().decode(plain));
+    SECRETS.set(+seat, s);
+    return s;
+  } catch (e) { return null; }  // 解不開就維持稱呼／待補
+}
+async function hydrateSecrets(){
+  for (const el of document.querySelectorAll('#view [data-sec]')){
+    const v = (await openSecret(+el.dataset.seat))?.[el.dataset.sec];
+    if (v){ el.textContent = v; el.classList.remove('tbd'); }
+  }
 }
 const tryUnlock = async (seat, pw) => (await unlockMany([+seat], pw)).length > 0;
 async function hydratePhotos(){
@@ -1311,14 +1338,16 @@ function vPlayer(seat){
     ...D.activities.flatMap(a => (a.reflections || []).filter(x => x.seat === seat).map(x => ({date:a.date, href:`#act-${a.id}~${pad2(seat)}`, tag:'活動心得', title:a.title, x})))]
     .sort((p, q) => q.date.localeCompare(p.date));
   const fact = (dt, dd) => `<div><dt>${dt}</dt><dd>${dd ? esc(dd) : '<span class="tbd">待補</span>'}</dd></div>`;
+  // 全名、生日：先放稱呼或「待補」，解密後換成真的內容（hydrateSecrets）
+  const sec = (f, fb) => { const v = secOf(seat, f); return `<span data-sec="${f}" data-seat="${+seat}"${v || fb ? '' : ' class="tbd"'}>${esc(v || fb || '待補')}</span>`; };
 
   const hero = `<header class="pl-hero"><svg class="pl-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M10 6H90V54L50 95L10 54Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/></svg>
     <div class="wrap">${pager}
       <div class="pl-id">
         <figure class="pl-photo">${p.photo ? encImg(p, '', k.nickname + ' 的照片') : '<img src="images/players/default.svg" alt="照片待補">'}<figcaption>照片待補</figcaption></figure>
         <div class="pl-name"><p class="pl-team">${esc(D.site.teamName)}</p>
-          <h2>${esc(k.nickname)}<span class="pl-num">#${p.number}</span></h2>
-          <dl class="pl-facts"><div><dt>守備位置</dt><dd>${pos ? esc(pos) : '—'}</dd></div><div><dt>投／打</dt><dd>${esc(p.bt || '—')}</dd></div><div><dt>班級</dt><dd>${esc(cls)}</dd></div><div><dt>座號</dt><dd>${pad2(seat)}</dd></div></dl>
+          <h2>${sec('name', k.nickname)}<span class="pl-num">#${p.number}</span></h2>
+          <dl class="pl-facts"><div><dt>守備位置</dt><dd>${pos ? esc(pos) : '—'}</dd></div><div><dt>生日</dt><dd>${sec('birthday', '—')}</dd></div><div><dt>投／打</dt><dd>${esc(p.bt || '—')}</dd></div><div><dt>班級</dt><dd>${esc(cls)}</dd></div><div><dt>座號</dt><dd>${pad2(seat)}</dd></div></dl>
         </div>
       </div>
     </div></header>`;
@@ -1339,7 +1368,7 @@ function vPlayer(seat){
     </section>`;
   const teamSec = trophies ? `<section id="pl-team" class="pl-sec">${secHead('球隊戰績', '和球隊一起打下的成績')}<ul class="pl-trophies">${trophies}</ul></section>` : '';
   const bio = `<section id="pl-bio" class="pl-sec">${secHead('球員小檔案')}
-      <dl class="pl-bio">${fact('稱呼', k.nickname)}${fact('背號', '#' + p.number)}${fact('守備位置', pos)}${fact('投／打', p.bt)}${fact('班級', cls === '—' ? '' : cls)}${fact('我的目標', p.goal)}</dl>
+      <dl class="pl-bio"><div><dt>姓名</dt><dd>${sec('name')}</dd></div>${fact('稱呼', k.nickname)}<div><dt>生日</dt><dd>${sec('birthday')}</dd></div>${fact('背號', '#' + p.number)}${fact('守備位置', pos)}${fact('投／打', p.bt)}${fact('班級', cls === '—' ? '' : cls)}${fact('我的目標', p.goal)}</dl>
       ${p.profile ? `<div class="pl-intro">${paras(p.profile).map(t => `<p>${esc(t)}</p>`).join('')}</div>` : '<div class="pl-intro tbd-box"><p>這裡可以放一段球員介紹：老師的觀察、教練的評語，或是球員自己寫的一段話。</p></div>'}
     </section>`;
   const notes = `<section id="pl-notes" class="pl-sec">${secHead('精選心得', '老師從聯絡簿札記和活動心得選出的文章')}
@@ -1475,6 +1504,7 @@ function route(){
   const fn = document.querySelector('#view .note.focus');
   if (fn) requestAnimationFrame(() => fn.scrollIntoView({block:'center'}));
   hydratePhotos();
+  hydrateSecrets();
   lastHash = h;
 }
 // ---------- photo viewer ----------

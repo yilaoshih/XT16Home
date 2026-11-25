@@ -3,16 +3,30 @@
     {
       "seat": 1,
       "number": 1,
-      "positions": [],
-      "photo": "images/players/01.json"
+      "positions": [
+        "外野手",
+        "投手"
+      ],
+      "bt": "右投右打",
+      "photo": "images/players/01.json",
+      "secret": {
+        "iv": "OkbZ1wzCdQhkKd/V",
+        "ct": "fUCkGcU8WK/7piIYPbVdXDr1kmh9XchJdi/4uh8FBOuJcETY1Abxu9wwhE48HIceRJHmA8fOrTy74IK520vGt7b9dtMM"
+      }
     },
     {
       "seat": 2,
       "number": 2,
       "positions": [
-        "外野手"
+        "外野手",
+        "投手"
       ],
-      "photo": "images/players/02.json"
+      "bt": "右投右打",
+      "photo": "images/players/02.json",
+      "secret": {
+        "iv": "NSroI9ef9wMCMkl4",
+        "ct": "rr+RJ4+qnWD8C3C8/U+r0R5gwYiqpw2sFc1sY02kfuuZrdwmlXRaL2CpmyVOIBmCxvffqiddTPBdyfoPWIllbRi6Jx5E"
+      }
     },
     {
       "seat": 3,
@@ -21,29 +35,56 @@
         "外野手",
         "投手"
       ],
-      "photo": "images/players/03.json"
+      "bt": "右投右打",
+      "photo": "images/players/03.json",
+      "secret": {
+        "iv": "8+P55gCss96nO3GK",
+        "ct": "nIZSTDarklPBw+LGu3MObq0JY2K0lBF9eYRtBOKqUbQCmqdsPQwPxkOtQBLJlMA5qdh7IIOkmXLzmYBJ7gFqFHC1Nw0B"
+      }
     },
     {
       "seat": 4,
       "number": 4,
-      "positions": [],
-      "photo": "images/players/04.json"
+      "positions": [
+        "外野手",
+        "投手"
+      ],
+      "bt": "左投左打",
+      "photo": "images/players/04.json",
+      "secret": {
+        "iv": "BjRZRGz7v3V0SsUH",
+        "ct": "KUWo3XOvxiiqOo5y2ZTR0J6j9sPIdq19OPyyvrFHokfutyRJljQW8xDdwEgBDeOMAs62n/qIEQ6SOqitb03wkCrIrxMz"
+      }
     },
     {
       "seat": 5,
       "number": 5,
       "positions": [
-        "游擊手"
+        "二壘手",
+        "游擊手",
+        "外野手"
       ],
-      "photo": "images/players/05.json"
+      "bt": "右投右打",
+      "photo": "images/players/05.json",
+      "secret": {
+        "iv": "UPY4za/DF2h1tVUR",
+        "ct": "C7UnxurlyS/GNyH2iJX6Lvfq0A9GBib/2kMnTwCWPvMQttTecBxslFf7s01rfuiruSBLsNqwZwKyTbj332pW2K5abMnj"
+      }
     },
     {
       "seat": 6,
       "number": 6,
       "positions": [
+        "二壘手",
+        "三壘手",
         "投手"
       ],
-      "photo": "images/players/06.json"
+      "bt": "右投右打",
+      "photo": "images/players/06.json",
+      "secret": {
+        "iv": "BIT5GteezMgczcye",
+        "ct": "rZEQRVaDkykGZ5xQw+tKLbYa6aYLwHKt32iFbwSWCm7SQKDqiZfeVMcMmheJyT5ej0Xq0Kgg57pXnJ+Ki+gWheZnZPJI"
+      }
     },
     {
       "seat": 7,
@@ -51,7 +92,12 @@
       "positions": [
         "外野手"
       ],
-      "photo": "images/players/07.json"
+      "bt": "右投右打",
+      "photo": "images/players/07.json",
+      "secret": {
+        "iv": "YnkKNKDNcS/aG+Se",
+        "ct": "3hDora0Fp3ENGQ3ksh1PtfAePSfTiSA8JC8De4hVNBzOZpcMuMqRGsoM1jpLlP/ZMUx2D4XKOSeCdHLPlqRSa/B5ZJX7"
+      }
     },
     {
       "seat": 8,
@@ -59,15 +105,26 @@
       "positions": [
         "二壘手"
       ],
-      "photo": "images/players/08.json"
+      "bt": "右投右打",
+      "photo": "images/players/08.json",
+      "secret": {
+        "iv": "0xEmyI8ls2LyfZXe",
+        "ct": "hc7QqiD+KeLN9SLKL43JI8tnIrNSik4SVhutgs0s8J+BDTIvCiBjiSLxABnnmlqrpO0fjFolQbDJCEsOp7Toco/FviGd"
+      }
     },
     {
       "seat": 9,
       "number": 9,
       "positions": [
-        "三壘手"
+        "三壘手",
+        "外野手"
       ],
-      "photo": "images/players/09.json"
+      "bt": "右投右打",
+      "photo": "images/players/09.json",
+      "secret": {
+        "iv": "snQcQb83uHWiF4pO",
+        "ct": "zpv96Kag6gzsDtfVtWZDLqglaPeGV7TZwVL2K/nAy/lTAoc1g8+33lzRnNbnUqbOCh7wbF8in0k6S7ZuI/PG8s81xAOH"
+      }
     },
     {
       "seat": 10,
@@ -75,13 +132,26 @@
       "positions": [
         "外野手"
       ],
-      "photo": "images/players/10.json"
+      "bt": "右投右打",
+      "photo": "images/players/10.json",
+      "secret": {
+        "iv": "3YrZVJZuQm70kfZn",
+        "ct": "PXm/C4YFrH0zmLOCziZjJi18yCbu18qB88VNz4JcM7RFT8a5B3TYGgEd3zTAEZUK0/GV9UCtKZFW17W/zfYMr2jn2r7f"
+      }
     },
     {
       "seat": 11,
       "number": 11,
-      "positions": [],
-      "photo": "images/players/11.json"
+      "positions": [
+        "游擊手",
+        "投手"
+      ],
+      "bt": "右投右打",
+      "photo": "images/players/11.json",
+      "secret": {
+        "iv": "JHRA7PoztTvvNvmO",
+        "ct": "wuRpVb//fGTkFNq2TvaZGYR9la5HXzcBeaIzvGtVGanmER0zJubXCK++h4Qq3rMvCjYXLWUd6wCIVXg4Er0991s+1M1F"
+      }
     },
     {
       "seat": 12,
@@ -89,25 +159,52 @@
       "positions": [
         "外野手"
       ],
-      "photo": "images/players/12.json"
+      "bt": "右投左打",
+      "photo": "images/players/12.json",
+      "secret": {
+        "iv": "J5ET+FKiu9SaSB+O",
+        "ct": "K+m/jHLsPEwiE0cH+JMK8kLsUbL6ERkgS3nGeZylEMcr5yWpRkgywdFziTIiDiAg6U5Vnb+pxhfnvsXhPxLq+HSEaTr5"
+      }
     },
     {
       "seat": 13,
       "number": 13,
-      "positions": [],
-      "photo": "images/players/13.json"
+      "positions": [
+        "外野手"
+      ],
+      "bt": "右投右打",
+      "photo": "images/players/13.json",
+      "secret": {
+        "iv": "TNkvFm9tqwmC5h5Q",
+        "ct": "PTT3vlyV+cq/KV2azNtEcMBJ87+Ov8l2Zk+7GDirTX2VeigU0XLSghnHdOubQYjdpxiMvNct2aonapMCDyNOU2oh1Acx"
+      }
     },
     {
       "seat": 14,
       "number": 14,
-      "positions": [],
-      "photo": "images/players/14.json"
+      "positions": [
+        "捕手"
+      ],
+      "bt": "右投右打",
+      "photo": "images/players/14.json",
+      "secret": {
+        "iv": "CgjstwzPfzkDIEkf",
+        "ct": "mLwgrItSfnwRV4TesJTigOz0p0fs0Z8VWQhkzxGc1ffXeU41WE9th6VUHHYkIu3YlqR7u2vorFAxgSTPtPNW31V0BYF0"
+      }
     },
     {
       "seat": 15,
       "number": 15,
-      "positions": [],
-      "photo": "images/players/15.json"
+      "positions": [
+        "三壘手",
+        "投手"
+      ],
+      "bt": "右投右打",
+      "photo": "images/players/15.json",
+      "secret": {
+        "iv": "CCrdzVdJnppYoPZD",
+        "ct": "CjqcWF2KFAv9SC250WwaPM3rF8IzKcFBbt7Tyl1BESlRrxXxjlWLwsi2cPDUuHW7SNOOhB8JBJdXYOc9xhS4X/v5P/33"
+      }
     },
     {
       "seat": 16,
@@ -115,7 +212,12 @@
       "positions": [
         "投手"
       ],
-      "photo": "images/players/16.json"
+      "bt": "左投左打",
+      "photo": "images/players/16.json",
+      "secret": {
+        "iv": "0MrtCcgjMdwwzbeu",
+        "ct": "dAUIfnJS6GJxozGmr0Y3KqhDrEYIhUvr7p/4c3QK5QWW/Tv+NbcYqdj4Ns4vzeCsNHOtls9OPERasH1bHDDZ59JgQXeB"
+      }
     },
     {
       "seat": 17,
@@ -123,13 +225,25 @@
       "positions": [
         "外野手"
       ],
-      "photo": "images/players/17.json"
+      "bt": "右投右打",
+      "photo": "images/players/17.json",
+      "secret": {
+        "iv": "c7wEi858atSXxeZ0",
+        "ct": "8hwWBNHpmnyyxS3Kinw80ncqX3qlX0BswIV2f5z4NY4cskU3iAMpF4aYySHq4bMWVB567zWh/ZBz76GWpr2RYNRaZ29M"
+      }
     },
     {
       "seat": 18,
       "number": 18,
-      "positions": [],
-      "photo": "images/players/18.json"
+      "positions": [
+        "外野手"
+      ],
+      "bt": "右投右打",
+      "photo": "images/players/18.json",
+      "secret": {
+        "iv": "w6wvWS3y/GlmQlEl",
+        "ct": "/QXvlmPyeG+LsabvwKvS/Q/MCj6lF/HqsVN1g3wGYJK9jYVDdpFLG9ggF7eLeHU/Kb4EssqQxh2uOH0fp//vUkh75vb/"
+      }
     },
     {
       "seat": 19,
@@ -137,7 +251,12 @@
       "positions": [
         "一壘手"
       ],
-      "photo": "images/players/19.json"
+      "bt": "右投右打",
+      "photo": "images/players/19.json",
+      "secret": {
+        "iv": "82FF9SiYik1lLH+2",
+        "ct": "3Eo20/V4CL6BA9AY9+b6/sNtjiyYZgD6JlqkRml7vcXa0joS92rYMt0tpW++CfUH1Llzd1c5wuWSstPQvd2uIseZQFMK"
+      }
     },
     {
       "seat": 20,
@@ -145,13 +264,26 @@
       "positions": [
         "投手"
       ],
-      "photo": "images/players/20.json"
+      "bt": "左投左打",
+      "photo": "images/players/20.json",
+      "secret": {
+        "iv": "S7p/yDWkIlTY23/W",
+        "ct": "oQqO05yCA/t6IkzE05FliMd5uVYNzTIcZNjrK48lM1VlQERq0YXoOS3HpOPsjRlmTsRQRxplNoJYK6SJQGBBDSceTkDp"
+      }
     },
     {
       "seat": 21,
       "number": 21,
-      "positions": [],
-      "photo": "images/players/21.json"
+      "positions": [
+        "二壘手",
+        "投手"
+      ],
+      "bt": "右投右打",
+      "photo": "images/players/21.json",
+      "secret": {
+        "iv": "2UQhhVwsD+1Z/TmL",
+        "ct": "vPNG6MObfuIP2pVKMovrrFjfxH20JNROYu2EC9BSTgqnW3hKMaZ+TlvQLr9hwr7ddr7qK2TIfYjglsDK1pX7/rOfcvNZ"
+      }
     },
     {
       "seat": 22,
@@ -159,15 +291,26 @@
       "positions": [
         "外野手"
       ],
-      "photo": "images/players/22.json"
+      "bt": "右投右打",
+      "photo": "images/players/22.json",
+      "secret": {
+        "iv": "fUAepkHDEt6o8G+a",
+        "ct": "AnsvzQG0MXuhB2Fnyr6tCGbYr1XbN8t4b+LIeTWY+01ZX5PmT51ER8QIn26tdeIJgdFOgN3jwnIBUMvjuF7NK9ska4cT"
+      }
     },
     {
       "seat": 23,
       "number": 23,
       "positions": [
-        "二壘手"
+        "二壘手",
+        "投手"
       ],
-      "photo": "images/players/23.json"
+      "bt": "右投右打",
+      "photo": "images/players/23.json",
+      "secret": {
+        "iv": "6pV1pHL3lRfaJGoy",
+        "ct": "jaQtrnKAVtEZyxo/oaOp9Is4XH+YHT4bpLDweBKv+rw5a6UFjS8iW6OzNBxR+zW/WKgEQWQASQBSIv1rj/z6skCvIBjC"
+      }
     },
     {
       "seat": 24,
@@ -175,13 +318,27 @@
       "positions": [
         "捕手"
       ],
-      "photo": "images/players/24.json"
+      "bt": "右投右打",
+      "photo": "images/players/24.json",
+      "secret": {
+        "iv": "A5ERYsX/3glzcY2n",
+        "ct": "hmMTjDqiPlVngCpHpirm7BKCU1Rec1PJ8Tfe6ZAlL/hKesxltMH7BZJC4geQrzSof8vAQGCEr1N1V4u8FuYpDdeBnWC4"
+      }
     },
     {
       "seat": 25,
       "number": 25,
-      "positions": [],
-      "photo": "images/players/25.json"
+      "positions": [
+        "二壘手",
+        "三壘手",
+        "投手"
+      ],
+      "bt": "右投右打",
+      "photo": "images/players/25.json",
+      "secret": {
+        "iv": "TLORTejvo8nwCWPU",
+        "ct": "guDqNf2bJXy7EK7Z4S4aRAAlS1OUCzwknShbCS+spLYYbRw3Ucje98lSdIoUCSQibSYygYvRG+Fs+cC0bgo3Iql08yBK"
+      }
     }
   ],
   "games": [
