@@ -1014,6 +1014,7 @@ function vParents(id){
 function albumHTML(a){
   const url = safeUrl(a.albumUrl);
   if (url) return `<div class="btns"><a class="btn" href="${esc(url)}" target="_blank" rel="noopener">看完整相簿</a></div>`;
+  if (!(a.photos || []).length && !(a.videos || []).length) return '';   // 沒有照片的活動（例如只有心得）不顯示相簿提示
   return D.site.albumNote ? `<p class="album-note">${icon('camera')}<span>${esc(D.site.albumNote)}</span></p>` : '';
 }
 function actBody(a){
