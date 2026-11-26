@@ -366,6 +366,7 @@ a.row:hover{transform:translateY(-3px);border-left-color:var(--berry);box-shadow
 .paper-note p{margin:0 0 .4em}
 .paper-note p:last-child{margin-bottom:0}
 .paper-note .paper-note-h{font-weight:900}
+.note .refl-note{margin:14px 0 0;padding:10px 14px;font-size:.9rem;line-height:1.75}
 .picks{margin-top:40px}
 .picks-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
 .picks-head h3{font-family:var(--f-head);font-weight:900;letter-spacing:-.02em;font-size:1.5rem;color:var(--head);margin:0}
@@ -938,7 +939,7 @@ function vContact(){
 
 // ---------- 閱讀心得 ----------
 function noteHTML(x, focus){
-  return `<figure class="note${focus === x.seat ? ' focus' : ''}" data-seat="${x.seat}"><blockquote>${paras(x.text).map(t => `<p>${rt(tokNames(t))}</p>`).join('')}</blockquote><figcaption>${seatBadge(x.seat)}</figcaption></figure>`;
+  return `<figure class="note${focus === x.seat ? ' focus' : ''}" data-seat="${x.seat}"><blockquote>${paras(x.text).map(t => `<p>${rt(tokNames(t))}</p>`).join('')}</blockquote><figcaption>${seatBadge(x.seat)}</figcaption>${x.note ? `<aside class="paper-note refl-note"><p class="paper-note-h">補充說明</p>${paras(x.note).map(t => `<p>${esc(t)}</p>`).join('')}</aside>` : ''}</figure>`;
 }
 function vReading(id, focus){
   const B = banner('page', '閱讀心得', '聯絡簿上每週的閱讀文章，和老師精選的同學心得。');
