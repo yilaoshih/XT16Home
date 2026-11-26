@@ -169,7 +169,7 @@ mark{background:var(--sun-soft);color:inherit;border-radius:3px;padding:0 1px;bo
 .pl-trophies b{grid-row:span 2;font-family:var(--f-head);font-weight:900;font-size:1.25rem;line-height:1.5;padding:2px 14px;color:var(--on-sun);background:var(--sun);transform:var(--slant)}
 .pl-trophies span{font-size:.92rem;line-height:1.45;color:var(--head);font-weight:700}
 .pl-trophies small{color:var(--ink-2);font-family:var(--f-num);font-size:.85rem}
-.pl-bio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0 0 16px;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.pl-bio{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:0 0 16px;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
 .pl-bio div{padding:12px 18px;border-bottom:1px solid var(--rule)}
 .pl-bio dt{font-size:.8rem;color:var(--ink-2)}
 .pl-bio dd{margin:2px 0 0;font-weight:700;color:var(--head)}
@@ -1370,7 +1370,7 @@ function vPlayer(seat){
     </section>`;
   const teamSec = trophies ? `<section id="pl-team" class="pl-sec">${secHead('球隊戰績', '和球隊一起打下的成績')}<ul class="pl-trophies">${trophies}</ul></section>` : '';
   const bio = `<section id="pl-bio" class="pl-sec">${secHead('球員小檔案')}
-      <dl class="pl-bio">${fact('稱呼', k.nickname)}<div><dt>生日</dt><dd>${sec('birthday')}</dd></div>${fact('背號', '#' + p.number)}${fact('守備位置', pos)}${fact('投／打', p.bt)}${fact('我的目標', p.goal)}</dl>
+      <dl class="pl-bio">${fact('稱呼', k.nickname)}${fact('守備位置', pos)}${fact('投／打', p.bt)}${fact('我的目標', p.goal)}</dl>
       ${p.profile ? `<div class="pl-intro">${paras(p.profile).map(t => `<p>${esc(t)}</p>`).join('')}</div>` : '<div class="pl-intro tbd-box"><p>這裡可以放一段球員介紹：老師的觀察、教練的評語，或是球員自己寫的一段話。</p></div>'}
     </section>`;
   const notes = `<section id="pl-notes" class="pl-sec">${secHead('精選心得', '老師從聯絡簿札記和活動心得選出的文章')}
